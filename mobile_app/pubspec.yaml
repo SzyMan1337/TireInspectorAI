@@ -1,6 +1,6 @@
 name: tireinspectorai_app
 description: "TireInspectorAI is an innovative mobile application designed to inspect and analyze the condition of tires using advanced artificial intelligence algorithms. This app helps users ensure their vehicle's tires are in optimal condition for safe driving."
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 version: 1.0.0+1
 
 environment:

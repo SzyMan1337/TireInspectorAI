@@ -39,6 +39,11 @@ final routerConfig = Provider<GoRouter>(
           ),
         ],
       ),
+      GoRoute(
+        path: '/',
+        name: RouterNames.feedsPage.name,
+        builder: (context, state) => const FeedsPage(),
+      ),
     ],
   ),
 );

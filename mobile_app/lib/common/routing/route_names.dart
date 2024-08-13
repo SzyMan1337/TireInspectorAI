@@ -3,4 +3,5 @@ enum RouterNames {
   registerPage,
   forgotPasswordPage,
   authPage,
+  feedsPage,
 }
