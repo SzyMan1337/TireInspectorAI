@@ -26,6 +26,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   json_serializable: ^6.8.0
   build_runner: ^2.4.11
+  flutter_native_splash: ^2.4.1
   flutter_launcher_icons: "^0.13.1"
 
 flutter:
@@ -34,7 +35,20 @@ flutter:
   assets:
     - assets/images/
 
+flutter_native_splash:
+  android: true
+  ios: true
+
+  background_image: assets/images/splash/background.png
+  image: assets/images/splash/logo.png
+  branding: assets/images/splash/branding.png
+
+  android_12:
+    color: "#d4e4ed"
+    image: assets/images/splash/android_logo.png
+    branding: assets/images/splash/android_branding.png    
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/icons/app-icon.jpg"
+  image_path: "assets/images/icons/app-icon.png"
