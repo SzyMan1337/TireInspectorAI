@@ -2,4 +2,8 @@
 export 'auth/pages/forgot_password_page.dart';
 export 'auth/pages/login_page.dart';
 export 'auth/pages/register_page.dart';
-export 'feeds/feeds_page.dart';
+export 'collections/collections_page.dart';
+export 'about/about_page.dart';
+export 'profile/profile_page.dart';
+export 'home/home_page.dart';
+export 'settings/settings_page.dart';

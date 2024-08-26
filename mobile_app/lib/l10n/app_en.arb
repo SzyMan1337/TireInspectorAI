@@ -21,5 +21,22 @@
   "uppercaseLetter": "Password must contain at least one uppercase letter",
   "lowercaseLetter": "Password must contain at least one lowercase letter",
   "oneNumber": "Password must contain at least one number",
-  "specialCharacter": "Password must contain at least one special character"
+  "specialCharacter": "Password must contain at least one special character",
+  "profileTitle": "Profile",
+  "recordsTitle": "Records",
+  "homeTitle": "Home",
+  "logoutButton": "Logout",
+  "homeTab": "Home",
+  "recordsTab": "Records",
+  "profileTab": "Profile",
+  "welcomeMessage": "Welcome to the Home Page!",
+  "settingsTitle": "Settings",
+  "darkModeLabel": "Dark Mode",
+  "loading": "Loading...",
+  "errorTitle": "Error",
+  "notLoggedInMessage": "You are not logged in!",
+  "about": "About",
+  "settingsTitle": "Settings",
+  "logoutButton": "Logout",
+  "aboutContent": "Tires are one of the most crucial components of a vehicle. The only subsystem of a car that is in constant contact with the road is the tire subsystem. Therefore, it is essential to monitor the condition of the tires regularly. Tires have a significant impact on vehicle safety, including handling, braking, and overall performance. This application aims to assist in monitoring and detecting tire damage using advanced artificial intelligence models.\n\nThis application was developed as part of a master's thesis titled 'Automatic Classification of Car Tire Condition Using Deep Learning Techniques' by Mateusz Szymański under the supervision of Dr. Janusz Rafałko."
 }

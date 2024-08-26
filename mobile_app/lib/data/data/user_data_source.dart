@@ -29,6 +29,22 @@ class _UserRemoteDataSource implements UserRepository {
       throw const UnknownException();
     }
   }
+
+  @override
+  Stream<UserInfoDataModel> getExtraUserInfo(String uid) {
+    return databaseDataSource
+        .collection(CollectionsName.users.name)
+        .doc(uid)
+        .snapshots()
+        .map(
+          (event) => UserInfoDataModel.fromJson(
+            {
+              ...event.data()!,
+              'uid': event.id,
+            },
+          ),
+        );
+  }
 }
 
 final userDataSourceProvider = Provider(

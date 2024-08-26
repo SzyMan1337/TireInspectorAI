@@ -1,23 +1,43 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/data/data.dart';
+import 'package:tireinspectorai_app/domain/domain.dart';
 
 abstract interface class UserUseCase {
   Future<void> signOut();
+  Stream<AppUser> getCurrentUserInfo();
 }
 
 class _UserUseCase implements UserUseCase {
-  _UserUseCase(this.authRepository);
+  const _UserUseCase(
+    this._authRepository,
+    this._userRepository,
+  );
 
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
+  final UserRepository _userRepository;
 
   @override
   Future<void> signOut() {
-    return authRepository.signOut();
+    return _authRepository.signOut();
+  }
+
+  @override
+  Stream<AppUser> getCurrentUserInfo() {
+    final user = _authRepository.currentUser;
+    return _userRepository
+        .getExtraUserInfo(
+          user.uid,
+        )
+        .map(
+          (userDataModel) => AppUser.fromUserInfoDataModel(userDataModel),
+        );
   }
 }
 
-final userUseCaseProvider = Provider<_UserUseCase>(
+// 3- Create a provider
+final userUseCaseProvider = Provider<UserUseCase>(
   (ref) => _UserUseCase(
     ref.watch(authRepositoryProvider),
+    ref.watch(userRepositoryProvider),
   ),
 );

@@ -41,8 +41,34 @@ final routerConfig = Provider<GoRouter>(
       ),
       GoRoute(
         path: '/',
-        name: RouterNames.feedsPage.name,
-        builder: (context, state) => const FeedsPage(),
+        name: RouterNames.homePage.name,
+        builder: (context, state) => const HomePage(),
+        routes: [
+          GoRoute(
+            path: 'profile/:userId',
+            name: RouterNames.profilePage.name,
+            builder: (context, state) => ProfilePage(
+              userId: state.pathParameters['userId']!,
+            ),
+          ),
+          GoRoute(
+            path: 'collections/:userId',
+            name: RouterNames.collectionsPage.name,
+            builder: (context, state) => CollectionsPage(
+              userId: state.pathParameters['userId']!,
+            ),
+          ),
+          GoRoute(
+            path: 'about',
+            name: RouterNames.aboutPage.name,
+            builder: (context, state) => const AboutPage(),
+          ),
+          GoRoute(
+            path: 'settings',
+            name: RouterNames.settingsPage.name,
+            builder: (context, state) => const SettingsPage(),
+          ),
+        ],
       ),
     ],
   ),

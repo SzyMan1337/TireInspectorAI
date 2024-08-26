@@ -21,5 +21,22 @@
   "uppercaseLetter": "Hasło musi zawierać co najmniej jedną wielką literę",
   "lowercaseLetter": "Hasło musi zawierać co najmniej jedną małą literę",
   "oneNumber": "Hasło musi zawierać co najmniej jedną cyfrę",
-  "specialCharacter": "Hasło musi zawierać co najmniej jeden znak specjalny"
+  "specialCharacter": "Hasło musi zawierać co najmniej jeden znak specjalny",
+  "profileTitle": "Profil",
+  "recordsTitle": "Rejestr",
+  "homeTitle": "Strona główna",
+  "logoutButton": "Wyloguj się",
+  "homeTab": "Strona główna",
+  "recordsTab": "Historia",
+  "profileTab": "Profil",
+  "welcomeMessage": "Witamy na stronie głównej!",
+  "settingsTitle": "Ustawienia",
+  "darkModeLabel": "Tryb ciemny",
+  "loading": "Ładowanie...",
+  "errorTitle": "Błąd",
+  "notLoggedInMessage": "Nie jesteś zalogowany!",
+  "about": "O aplikacji",
+  "settingsTitle": "Ustawienia",
+  "logoutButton": "Wyloguj się",
+  "aboutContent": "Opony są jednym z najważniejszych składników pojazdu. Jedynym podsystemem samochodowym, który jest w ciągłym kontakcie z drogą, jest podsystem opony. Dlatego ważne jest, aby regularnie monitorować stan opon. Opony mają istotny wpływ na bezpieczeństwo pojazdu, w tym na prowadzenie, hamowanie i ogólną wydajność. Ta aplikacja ma na celu pomoc w monitorowaniu i wykrywaniu uszkodzeń opon przy wykorzystaniu zaawansowanych modeli sztucznej inteligencji.\n\nAplikacja została opracowana w ramach pracy magisterskiej pt. 'Automatyczna klasyfikacja stanu opon samochodowych przy użyciu technik głębokiego uczenia' przez Mateusza Szymańskiego pod kierunkiem dr. inż. Janusza Rafałko."
 }

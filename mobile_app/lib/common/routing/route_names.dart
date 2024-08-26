@@ -3,5 +3,9 @@ enum RouterNames {
   registerPage,
   forgotPasswordPage,
   authPage,
-  feedsPage,
+  homePage,
+  collectionsPage,
+  profilePage,
+  aboutPage,
+  settingsPage,
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/exceptions/app_exceptions.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 
 import '../state/login_state.dart';
 import '../widgets/social_login.dart';
@@ -15,6 +15,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginState = ref.watch(loginStateProvider);
+    final l10n = ref.watch(localizationProvider);
 
     // in case of error show a snackbar
     ref.listen(
@@ -28,7 +29,7 @@ class LoginPage extends ConsumerWidget {
               content: Text(
                 error is AppFirebaseException
                     ? error.message
-                    : AppLocalizations.of(context)!.somethingWentWrong,
+                    : l10n.somethingWentWrong,
               ),
             ),
           );
@@ -39,7 +40,7 @@ class LoginPage extends ConsumerWidget {
     );
 
     return CommonPageScaffold(
-      title: AppLocalizations.of(context)!.loginTitle,
+      title: l10n.loginTitle,
       child: loginState.isLoading
           ? const Center(
               child: CircularProgressIndicator(),
@@ -50,7 +51,7 @@ class LoginPage extends ConsumerWidget {
                 const WelcomeText(),
                 GapWidgets.h16,
                 UserPassForm(
-                  buttonLabel: AppLocalizations.of(context)!.login,
+                  buttonLabel: l10n.login,
                   onFormSubmit: (
                     String email,
                     String password,
@@ -68,7 +69,7 @@ class LoginPage extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(AppLocalizations.of(context)!.dontHaveAccount),
+                    Text(l10n.dontHaveAccount),
                     TextButton(
                       onPressed: () {
                         AppRouter.go(
@@ -76,7 +77,7 @@ class LoginPage extends ConsumerWidget {
                           RouterNames.registerPage,
                         );
                       },
-                      child: Text(AppLocalizations.of(context)!.signUp),
+                      child: Text(l10n.signUp),
                     ),
                   ],
                 ),
@@ -90,12 +91,12 @@ class LoginPage extends ConsumerWidget {
                           RouterNames.forgotPasswordPage,
                         );
                       },
-                      child: Text(AppLocalizations.of(context)!.forgotPassword),
+                      child: Text(l10n.forgotPassword),
                     ),
                   ],
                 ),
                 GapWidgets.h8,
-                Text(AppLocalizations.of(context)!.orLoginWith),
+                Text(l10n.orLoginWith),
                 SocialLogin(
                   onGooglePressed: () {
                     ref

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tireinspectorai_app/common/routing/route_names.dart';
@@ -16,6 +17,10 @@ class AppRouter {
   }
 
   static pop(context) => GoRouter.of(context).pop();
+
+  static String getCurrentLocation(BuildContext context) {
+    return GoRouterState.of(context).uri.toString();
+  }
 
   static Provider<GoRouter> config = routerConfig;
 }

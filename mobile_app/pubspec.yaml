@@ -34,6 +34,7 @@ flutter:
   generate: true
   assets:
     - assets/images/
+    - assets/images/about/
 
 flutter_native_splash:
   android: true

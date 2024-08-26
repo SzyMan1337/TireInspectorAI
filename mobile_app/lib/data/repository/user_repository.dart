@@ -12,6 +12,11 @@ class _UserRepository implements UserRepository {
   final UserRepository databaseDataSource;
 
   @override
+  Stream<UserInfoDataModel> getExtraUserInfo(String uid) {
+    return databaseDataSource.getExtraUserInfo(uid);
+  }
+
+  @override
   Future<void> createUser(UserInfoDataModel user) {
     return databaseDataSource.createUser(user);
   }
