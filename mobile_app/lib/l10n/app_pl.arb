@@ -37,6 +37,10 @@
   "notLoggedInMessage": "Nie jesteś zalogowany!",
   "about": "O aplikacji",
   "settingsTitle": "Ustawienia",
+  "notificationPreferencesLabel": "Preferencje powiadomień",
+  "languageLabel": "Język",
+  "englishLanguage": "Angielski",
+  "polishLanguage": "Polski",
   "logoutButton": "Wyloguj się",
   "aboutContent": "Opony są jednym z najważniejszych składników pojazdu. Jedynym podsystemem samochodowym, który jest w ciągłym kontakcie z drogą, jest podsystem opony. Dlatego ważne jest, aby regularnie monitorować stan opon. Opony mają istotny wpływ na bezpieczeństwo pojazdu, w tym na prowadzenie, hamowanie i ogólną wydajność. Ta aplikacja ma na celu pomoc w monitorowaniu i wykrywaniu uszkodzeń opon przy wykorzystaniu zaawansowanych modeli sztucznej inteligencji.\n\nAplikacja została opracowana w ramach pracy magisterskiej pt. 'Automatyczna klasyfikacja stanu opon samochodowych przy użyciu technik głębokiego uczenia' przez Mateusza Szymańskiego pod kierunkiem dr. inż. Janusza Rafałko."
 }

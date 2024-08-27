@@ -14,10 +14,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // if (kDebugMode) {
-  //   await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-  // }
-
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -31,16 +27,29 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+    final locale = ref.watch(localeProvider);
+
     return MaterialApp.router(
       title: "Tire Inspector AI",
       theme: AppTheme.lightThemeData,
       darkTheme: AppTheme.darkThemeData,
-      themeMode: ref.watch(themeModeProvider),
+      themeMode: themeMode,
       routerConfig: ref.watch(AppRouter.config),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
+      locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {
-        return LocalizationProvider(child: child!);
+        final appLocalizations = AppLocalizations.of(context);
+        if (appLocalizations == null) {
+          return child!;
+        }
+        return ProviderScope(
+          overrides: [
+            localizationProvider.overrideWithValue(appLocalizations),
+          ],
+          child: child!,
+        );
       },
     );
   }
