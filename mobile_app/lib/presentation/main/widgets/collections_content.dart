@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 
-class ProfilePage extends ConsumerWidget {
-  const ProfilePage({
+class CollectionsContent extends ConsumerWidget {
+  const CollectionsContent({
     super.key,
     required this.userId,
   });
@@ -15,11 +14,8 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(localizationProvider);
 
-    return CommonPageScaffold(
-      title: l10n.profileTitle,
-      child: const Center(
-        child: Text('Profile Page Content'),
-      ),
+    return Center(
+      child: Text('${l10n.recordsTitle} for User: $userId'),
     );
   }
 }
