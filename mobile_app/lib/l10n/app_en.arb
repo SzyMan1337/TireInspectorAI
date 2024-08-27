@@ -51,5 +51,12 @@
   "inspectedTiresLabel": "Inspected Tires",
   "validTiresLabel": "Valid Tires",
   "defectiveTiresLabel": "Defective Tires",
-  "items": "items"
+  "items": "items",
+  "uploadImageLabel": "Upload Image",
+  "uploadImagePrompt": "Tap to upload an image",
+  "selectModelLabel": "Select Model",
+  "selectModelPrompt": "Choose a model",
+  "model1": "Model 1",
+  "model2": "Model 2",
+  "inspectButtonLabel": "Run Inspection"
 }
