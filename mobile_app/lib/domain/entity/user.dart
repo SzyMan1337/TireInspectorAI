@@ -11,7 +11,7 @@ class AppUser extends UserInfoDataModel {
   });
 
   String get id => uid;
-  String get avatar => photoUrl ?? 'https://via.placeholder.com/150';
+  String get avatar => photoUrl ?? 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png';
 
   toUserInfoDataModel() {
     return UserInfoDataModel(
