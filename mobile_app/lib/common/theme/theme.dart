@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppTheme {
   static ThemeData get lightThemeData => ThemeData(
@@ -32,9 +31,3 @@ class AppTheme {
         useMaterial3: true,
       );
 }
-
-final themeModeProvider = StateProvider<ThemeMode>(
-  (ref) {
-    return ThemeMode.system;
-  },
-);

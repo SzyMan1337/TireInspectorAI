@@ -6,6 +6,7 @@ import 'package:tireinspectorai_app/common/theme/theme.dart';
 import 'package:tireinspectorai_app/firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
+import 'package:tireinspectorai_app/presentation/settings/state/theme_mode_state.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
