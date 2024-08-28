@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -58,7 +59,7 @@ class ProfileContent extends ConsumerWidget {
       children: [
         Center(
           child: CircleAvatar(
-            radius: 50.0,
+            radius: 80.0,
             backgroundImage: NetworkImage(user.avatar),
           ),
         ),
@@ -134,7 +135,13 @@ class ProfileContent extends ConsumerWidget {
       child: Center(
         child: ElevatedButton(
           onPressed: () {
-            // TODO Implement Edit Profile navigation
+            AppRouter.go(
+              context,
+              RouterNames.editProfilePage,
+              pathParameters: {
+                'userId': userId,
+              },
+            );
           },
           child: Text(l10n.editProfileButton),
         ),

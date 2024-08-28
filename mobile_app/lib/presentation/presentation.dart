@@ -8,3 +8,4 @@ export 'main/widgets/profile_content.dart';
 export 'main/widgets/home_content.dart';
 export 'settings/settings_page.dart';
 export 'main/main_page.dart';
+export 'profile/edit_profile_page.dart';

@@ -20,6 +20,22 @@ class _UserRepository implements UserRepository {
   Future<void> createUser(UserInfoDataModel user) {
     return databaseDataSource.createUser(user);
   }
+
+  @override
+  Future<void> updateAvatarImage({required String uid, String? photoUrl}) {
+    return databaseDataSource.updateAvatarImage(uid: uid, photoUrl: photoUrl);
+  }
+
+  @override
+  Future<void> editUserProfile({
+    required String uid,
+    required String displayName,
+  }) {
+    return databaseDataSource.editUserProfile(
+      uid: uid,
+      displayName: displayName,
+    );
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>(

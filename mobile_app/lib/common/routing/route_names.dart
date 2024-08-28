@@ -6,4 +6,5 @@ enum RouterNames {
   mainPage,
   aboutPage,
   settingsPage,
+  editProfilePage,
 }

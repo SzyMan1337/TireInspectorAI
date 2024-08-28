@@ -52,7 +52,7 @@ class HomeContent extends ConsumerWidget {
             decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               borderRadius: BorderRadius.circular(12.0),
-              color: Theme.of(context).colorScheme.surfaceVariant,
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
             ),
             child: uploadedImagePath != null
                 ? Image.asset(uploadedImagePath, fit: BoxFit.cover)

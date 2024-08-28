@@ -58,5 +58,13 @@
   "selectModelPrompt": "Choose a model",
   "model1": "Model 1",
   "model2": "Model 2",
-  "inspectButtonLabel": "Run Inspection"
+  "inspectButtonLabel": "Run Inspection",
+ "editProfileTitle": "Edit Profile",
+  "profileUpdatedMessage": "Profile updated successfully.",
+  "displayNameRequiredMessage": "Display name is required.",
+  "displayNameLabel": "Display Name",
+  "changeImageButtonLabel": "Change Image",
+  "imageUpdatedMessage": "Image has been updated",
+  "imageDeletedMessage": "Image has been deleted",
+  "deleteImageButtonLabel": "Delete Image"
 }

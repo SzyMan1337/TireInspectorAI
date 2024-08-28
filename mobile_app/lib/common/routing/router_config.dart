@@ -54,6 +54,14 @@ final routerConfig = Provider<GoRouter>(
             name: RouterNames.settingsPage.name,
             builder: (context, state) => const SettingsPage(),
           ),
+          GoRoute(
+            path: 'edit-profile/:userId',
+            name: RouterNames.editProfilePage.name,
+            builder: (context, state) {
+              final userId = state.pathParameters['userId']!;
+              return EditProfilePage(userId: userId);
+            },
+          ),
         ],
       ),
     ],

@@ -58,5 +58,13 @@
   "selectModelPrompt": "Wybierz model",
   "model1": "Model 1",
   "model2": "Model 2",
-  "inspectButtonLabel": "Rozpocznij inspekcję"
+  "inspectButtonLabel": "Rozpocznij inspekcję",
+  "editProfileTitle": "Edytuj profil",
+  "profileUpdatedMessage": "Profil został zaktualizowany pomyślnie.",
+  "displayNameRequiredMessage": "Wymagane jest imię.",
+  "displayNameLabel": "Imię",
+  "changeImageButtonLabel": "Zmień zdjęcie",
+  "imageUpdatedMessage": "Zdjęcie zostało zaktualizowane",
+  "imageDeletedMessage": "Zdjęcie zostało usunięte",
+  "deleteImageButtonLabel": "Usuń zdjęcie"
 }

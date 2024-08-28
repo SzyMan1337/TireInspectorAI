@@ -45,6 +45,31 @@ class _UserRemoteDataSource implements UserRepository {
           ),
         );
   }
+
+  @override
+  Future<void> updateAvatarImage({required String uid, String? photoUrl}) {
+    return databaseDataSource
+        .collection(CollectionsName.users.name)
+        .doc(uid)
+        .update(
+      {
+        'photoUrl': photoUrl,
+      },
+    );
+  }
+
+  @override
+  Future<void> editUserProfile(
+      {required String uid, required String displayName}) {
+    return databaseDataSource
+        .collection(CollectionsName.users.name)
+        .doc(uid)
+        .update(
+      {
+        'displayName': displayName,
+      },
+    );
+  }
 }
 
 final userDataSourceProvider = Provider(
