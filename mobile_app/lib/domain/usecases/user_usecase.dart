@@ -34,7 +34,6 @@ class _UserUseCase implements UserUseCase {
   }
 }
 
-// 3- Create a provider
 final userUseCaseProvider = Provider<UserUseCase>(
   (ref) => _UserUseCase(
     ref.watch(authRepositoryProvider),

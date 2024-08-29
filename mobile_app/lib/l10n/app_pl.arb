@@ -66,5 +66,21 @@
   "changeImageButtonLabel": "Zmień zdjęcie",
   "imageUpdatedMessage": "Zdjęcie zostało zaktualizowane",
   "imageDeletedMessage": "Zdjęcie zostało usunięte",
-  "deleteImageButtonLabel": "Usuń zdjęcie"
+  "deleteImageButtonLabel": "Usuń zdjęcie",
+  "addCollectionTitle": "Dodaj nową kolekcję",
+  "addCollectionHint": "Wprowadź nazwę kolekcji",
+  "cancelButtonLabel": "Anuluj",
+  "addButtonLabel": "Dodaj",
+  "noCollectionsAvailable": "Brak dostępnych kolekcji",
+  "loadingMessage": "Ładowanie...",
+  "errorMessage": "Wystąpił błąd",
+  "deleteCollectionTitle": "Usuń kolekcję",
+  "deleteCollectionConfirmation": "Czy na pewno chcesz usunąć tę kolekcję? Wszystkie inspekcje w niej zawarte również zostaną usunięte.",
+  "deleteButtonLabel": "Usuń",
+  "collectionDeletedSuccessfully": "Kolekcja została pomyślnie usunięta",
+  "collectionPageTitle": "Kolekcja",
+  "creationDateLabel": "Utworzono {date}",
+  "noInspectionsAvailable": "Brak dostępnych inspekcji",
+  "inspectionTitle": "Inspekcja",
+  "inspectionDateLabel": "Sprawdzono: {inspectionDate}"
 }

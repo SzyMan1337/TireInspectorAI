@@ -66,5 +66,21 @@
   "changeImageButtonLabel": "Change Image",
   "imageUpdatedMessage": "Image has been updated",
   "imageDeletedMessage": "Image has been deleted",
-  "deleteImageButtonLabel": "Delete Image"
+  "deleteImageButtonLabel": "Delete Image",
+  "addCollectionTitle": "Add New Collection",
+  "addCollectionHint": "Enter collection name",
+  "cancelButtonLabel": "Cancel",
+  "addButtonLabel": "Add",
+  "noCollectionsAvailable": "No collections available",
+  "loadingMessage": "Loading...",
+  "errorMessage": "An error occurred",
+  "deleteCollectionTitle": "Delete Collection",
+  "deleteCollectionConfirmation": "Are you sure you want to delete this collection? All inspections within it will also be deleted.",
+  "deleteButtonLabel": "Delete",
+  "collectionDeletedSuccessfully": "Collection deleted successfully",
+  "collectionPageTitle": "Collection",
+  "creationDateLabel": "Created on {date}",
+  "noInspectionsAvailable": "No inspections available",
+  "inspectionTitle": "Inspection",
+  "inspectionDateLabel": "Checked on {date}"
 }

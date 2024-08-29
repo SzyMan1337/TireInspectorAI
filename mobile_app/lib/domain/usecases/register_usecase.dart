@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/data/data.dart';
 
-// 1- First abstract the class
 abstract interface class RegisterUserCase {
   Future<bool> registerWithEmailPassword({
     required String email,
@@ -9,7 +8,6 @@ abstract interface class RegisterUserCase {
   });
 }
 
-// 2- Implement the class
 class _RegisterUserCase implements RegisterUserCase {
   _RegisterUserCase(this._authRepository);
 
@@ -29,7 +27,6 @@ class _RegisterUserCase implements RegisterUserCase {
   }
 }
 
-// 3- Create a provider
 final registerUseCaseProvider = Provider<RegisterUserCase>(
   (ref) => _RegisterUserCase(ref.watch(authRepositoryProvider)),
 );

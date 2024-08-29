@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/presentation/presentation.dart';
@@ -53,47 +54,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _currentIndex == 0
-              ? l10n.homeTitle
-              : _currentIndex == 1
-                  ? l10n.recordsTitle
-                  : l10n.profileTitle,
-        ),
-        centerTitle: true,
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case 'about':
-                  AppRouter.go(context, RouterNames.aboutPage);
-                  break;
-                case 'settings':
-                  AppRouter.go(context, RouterNames.settingsPage);
-                  break;
-                case 'logout':
-                  ref.read(userUseCaseProvider).signOut();
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
-                value: 'about',
-                child: Text(l10n.about),
-              ),
-              PopupMenuItem(
-                value: 'settings',
-                child: Text(l10n.settingsTitle),
-              ),
-              PopupMenuItem(
-                value: 'logout',
-                child: Text(l10n.logoutButton),
-              ),
-            ],
-          ),
-        ],
-      ),
+      appBar: _buildAppBar(context, l10n),
       body: IndexedStack(
         index: _currentIndex,
         children: pages,
@@ -121,5 +82,51 @@ class _MainPageState extends ConsumerState<MainPage> {
         ],
       ),
     );
+  }
+
+  AppBar _buildAppBar(BuildContext context, AppLocalizations l10n) {
+    return AppBar(
+      title: Text(
+        _currentIndex == 0
+            ? l10n.homeTitle
+            : _currentIndex == 1
+                ? l10n.recordsTitle
+                : l10n.profileTitle,
+      ),
+      centerTitle: true,
+      actions: [
+        PopupMenuButton<String>(
+          onSelected: (value) => _handleMenuSelection(value, context),
+          itemBuilder: (BuildContext context) => [
+            PopupMenuItem(
+              value: 'about',
+              child: Text(l10n.about),
+            ),
+            PopupMenuItem(
+              value: 'settings',
+              child: Text(l10n.settingsTitle),
+            ),
+            PopupMenuItem(
+              value: 'logout',
+              child: Text(l10n.logoutButton),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void _handleMenuSelection(String value, BuildContext context) {
+    switch (value) {
+      case 'about':
+        AppRouter.go(context, RouterNames.aboutPage);
+        break;
+      case 'settings':
+        AppRouter.go(context, RouterNames.settingsPage);
+        break;
+      case 'logout':
+        ref.read(userUseCaseProvider).signOut();
+        break;
+    }
   }
 }

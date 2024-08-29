@@ -9,3 +9,4 @@ export 'main/widgets/home_content.dart';
 export 'settings/settings_page.dart';
 export 'main/main_page.dart';
 export 'profile/edit_profile_page.dart';
+export 'collection/collection_page.dart';

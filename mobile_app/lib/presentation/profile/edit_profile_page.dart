@@ -70,11 +70,11 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
           children: [
             GapWidgets.h24,
             _buildProfileImageSection(context, ref, l10n, appUser.avatar),
-            GapWidgets.h24,
+            GapWidgets.h48,
             _buildDisplayNameField(context, l10n),
             const Spacer(),
             _buildSaveButton(context, l10n),
-            GapWidgets.h24,
+            GapWidgets.h48,
           ],
         ),
       ),
@@ -98,22 +98,22 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
                 : CachedNetworkImageProvider(avatarUrl) as ImageProvider,
           ),
           Positioned(
-            bottom: 0,
-            right: 0,
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.camera_alt),
-                  onPressed: () => _pickImage(ref, ImageSource.gallery),
-                  color: Theme.of(context).colorScheme.primary,
+            bottom: 8,
+            right: 8,
+            child: GestureDetector(
+              onTap: () => _showImageOptions(ref, context, l10n),
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                 ),
-                if (selectedImage != null || avatarUrl.isNotEmpty)
-                  IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () => _deleteImage(ref, context, l10n),
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-              ],
+                child: Icon(
+                  Icons.edit,
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                  size: 20.0,
+                ),
+              ),
             ),
           ),
         ],
@@ -181,8 +181,42 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
       uid: widget.userId,
       imageUrl: '',
     )));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.imageDeletedMessage)),
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.imageDeletedMessage)),
+      );
+    }
+  }
+
+  void _showImageOptions(
+      WidgetRef ref, BuildContext context, AppLocalizations l10n) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: Text(l10n.changeImageButtonLabel),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  _pickImage(ref, ImageSource.gallery);
+                },
+              ),
+              if (selectedImage != null || widget.userId.isNotEmpty)
+                ListTile(
+                  leading: const Icon(Icons.delete),
+                  title: Text(l10n.deleteImageButtonLabel),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    _deleteImage(ref, context, l10n);
+                  },
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

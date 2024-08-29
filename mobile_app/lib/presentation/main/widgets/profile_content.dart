@@ -41,13 +41,13 @@ class ProfileContent extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 24.0),
+          GapWidgets.h24,
           _buildProfileHeader(context, appUser),
-          const SizedBox(height: 24.0),
+          GapWidgets.h24,
           _buildStatisticsSection(context, l10n),
           const Spacer(),
           _buildEditProfileButton(context, l10n),
-          const SizedBox(height: 24.0),
+          GapWidgets.h24,
         ],
       ),
     );
@@ -63,7 +63,7 @@ class ProfileContent extends ConsumerWidget {
             backgroundImage: NetworkImage(user.avatar),
           ),
         ),
-        const SizedBox(height: 16.0),
+        GapWidgets.h16,
         Center(
           child: Text(
             user.displayName ?? 'Anonymous User',
@@ -72,7 +72,7 @@ class ProfileContent extends ConsumerWidget {
                 ),
           ),
         ),
-        const SizedBox(height: 8.0),
+        GapWidgets.h8,
         Center(
           child: Text(
             user.email,
@@ -101,11 +101,11 @@ class ProfileContent extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        const SizedBox(height: 16.0),
+        GapWidgets.h16,
         _buildStatisticRow(context, l10n.inspectedTiresLabel, inspectedTires),
-        const SizedBox(height: 8.0),
+        GapWidgets.h8,
         _buildStatisticRow(context, l10n.validTiresLabel, validTires),
-        const SizedBox(height: 8.0),
+        GapWidgets.h8,
         _buildStatisticRow(context, l10n.defectiveTiresLabel, defectiveTires),
       ],
     );
@@ -132,19 +132,17 @@ class ProfileContent extends ConsumerWidget {
   Widget _buildEditProfileButton(BuildContext context, AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
-      child: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            AppRouter.go(
-              context,
-              RouterNames.editProfilePage,
-              pathParameters: {
-                'userId': userId,
-              },
-            );
-          },
-          child: Text(l10n.editProfileButton),
-        ),
+      child: HighlightButton(
+        text: l10n.editProfileButton,
+        onPressed: () {
+          AppRouter.go(
+            context,
+            RouterNames.editProfilePage,
+            pathParameters: {
+              'userId': userId,
+            },
+          );
+        },
       ),
     );
   }

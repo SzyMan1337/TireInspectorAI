@@ -62,6 +62,14 @@ final routerConfig = Provider<GoRouter>(
               return EditProfilePage(userId: userId);
             },
           ),
+          GoRoute(
+            path: 'collection/:collectionId',
+            name: RouterNames.collectionPage.name,
+            builder: (context, state) {
+              final collectionId = state.pathParameters['collectionId']!;
+              return CollectionPage(collectionId: collectionId);
+            },
+          ),
         ],
       ),
     ],
