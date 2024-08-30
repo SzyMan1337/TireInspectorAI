@@ -1,0 +1,4 @@
+enum InspectionModel {
+  localModel,
+  cloudModel,
+}

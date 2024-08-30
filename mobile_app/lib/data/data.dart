@@ -4,6 +4,11 @@ export 'interfaces/user_interface.dart';
 export 'interfaces/storage_interface.dart';
 export 'interfaces/tire_collection_interface.dart';
 export 'interfaces/inspection_interface.dart';
+export 'interfaces/model_evaluator.dart';
+
+// services
+export 'services/cloud_model_evaluator.dart';
+export 'services/local_model_evaluator.dart';
 
 // models
 export 'models/current_user.dart';

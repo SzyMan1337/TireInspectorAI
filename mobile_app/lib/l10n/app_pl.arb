@@ -24,7 +24,7 @@
   "specialCharacter": "Hasło musi zawierać co najmniej jeden znak specjalny",
   "profileTitle": "Profil",
   "recordsTitle": "Rejestr",
-  "homeTitle": "Strona główna",
+  "homeTitle": "Kontrola opon",
   "logoutButton": "Wyloguj się",
   "homeTab": "Strona główna",
   "recordsTab": "Historia",
@@ -56,8 +56,6 @@
   "uploadImagePrompt": "Kliknij, aby załadować zdjęcie",
   "selectModelLabel": "Wybierz model",
   "selectModelPrompt": "Wybierz model",
-  "model1": "Model 1",
-  "model2": "Model 2",
   "inspectButtonLabel": "Rozpocznij inspekcję",
   "editProfileTitle": "Edytuj profil",
   "profileUpdatedMessage": "Profil został zaktualizowany pomyślnie.",
@@ -83,5 +81,9 @@
   "noInspectionsAvailable": "Brak dostępnych inspekcji",
   "inspectionTitle": "Inspekcja",
   "inspectionDateLabel": "Sprawdzono: {inspectionDate}",
-  "inspectionDatePrefix": "Data: "
+  "inspectionDatePrefix": "Data: ",
+  "localModel": "Model Lokalny",
+  "cloudModel": "Model w Chmurze",
+  "clickToEditLabel": "Kliknij, aby edytować",
+  "selectModelAndImagePrompt": "Proszę wybrać model i przesłać obraz."
 }

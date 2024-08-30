@@ -12,8 +12,11 @@ export 'usecases/user_usecase.dart';
 export 'usecases/edit_profile_usecase.dart';
 export 'usecases/tire_collection_usecase.dart';
 export 'usecases/inspection_usecase.dart';
+export 'usecases/tire_health_evaluation_usecase.dart';
 
 // entity
 export 'entity/user.dart';
 export 'entity/inspection.dart';
 export 'entity/tire_collection.dart';
+export 'entity/inspection_model.dart';
+export 'entity/inspection_result.dart';

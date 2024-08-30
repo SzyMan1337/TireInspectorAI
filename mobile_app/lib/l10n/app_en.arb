@@ -24,7 +24,7 @@
   "specialCharacter": "Password must contain at least one special character",
   "profileTitle": "Profile",
   "recordsTitle": "Records",
-  "homeTitle": "Home",
+  "homeTitle": "Tire Inspection",
   "logoutButton": "Logout",
   "homeTab": "Home",
   "recordsTab": "Collections",
@@ -56,8 +56,6 @@
   "uploadImagePrompt": "Tap to upload an image",
   "selectModelLabel": "Select Model",
   "selectModelPrompt": "Choose a model",
-  "model1": "Model 1",
-  "model2": "Model 2",
   "inspectButtonLabel": "Run Inspection",
  "editProfileTitle": "Edit Profile",
   "profileUpdatedMessage": "Profile updated successfully.",
@@ -83,5 +81,9 @@
   "noInspectionsAvailable": "No inspections available",
   "inspectionTitle": "Inspection",
   "inspectionDateLabel": "Checked on {date}",
-  "inspectionDatePrefix": "Date: "
+  "inspectionDatePrefix": "Date: ",
+  "localModel": "Local Model",
+  "cloudModel": "Cloud Model",
+  "clickToEditLabel": "Click to edit",
+  "selectModelAndImagePrompt": "Please select a model and upload an image."
 }
