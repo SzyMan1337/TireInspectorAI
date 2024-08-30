@@ -71,6 +71,25 @@ final routerConfig = Provider<GoRouter>(
               return CollectionPage(userId: userId, collectionId: collectionId);
             },
           ),
+          GoRoute(
+            path: 'inspection-result',
+            name: RouterNames.inspectionResultPage.name,
+            builder: (context, state) {
+              final imageUrl = state.uri.queryParameters['imageUrl']!;
+              final probabilityScore =
+                  double.parse(state.uri.queryParameters['probabilityScore']!);
+              final modelUsed = state.uri.queryParameters['modelUsed']!;
+              final evaluationDate =
+                  DateTime.parse(state.uri.queryParameters['evaluationDate']!);
+
+              return InspectionResultPage(
+                imageUrl: imageUrl,
+                probabilityScore: probabilityScore,
+                modelUsed: modelUsed,
+                evaluationDate: evaluationDate,
+              );
+            },
+          ),
         ],
       ),
     ],

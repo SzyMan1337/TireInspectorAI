@@ -8,4 +8,5 @@ enum RouterNames {
   settingsPage,
   editProfilePage,
   collectionPage,
+  inspectionResultPage,
 }

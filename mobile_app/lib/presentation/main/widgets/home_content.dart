@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -191,16 +192,50 @@ class HomeContent extends ConsumerWidget {
       BuildContext context, AppLocalizations l10n, WidgetRef ref) {
     return Center(
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           final model = ref.read(selectedModelProvider);
           final imagePath = ref.read(uploadedImagePathProvider);
 
           if (model != null && imagePath != null) {
-            ref.read(runInspectionStateProvider(RunInspectionData(
-              model: model,
-              imagePath: imagePath,
-            )));
-            // TODO: Navigate to inspection result page or show a success message
+            try {
+              final inspectionResultAsyncValue = ref.read(
+                runInspectionStateProvider(RunInspectionData(
+                  model: model,
+                  imagePath: imagePath,
+                )).future,
+              );
+
+              inspectionResultAsyncValue.then(
+                (inspectionResult) {
+                  if (context.mounted) {
+                    AppRouter.go(
+                      context,
+                      RouterNames.inspectionResultPage,
+                      queryParameters: {
+                        'imageUrl': inspectionResult.imageUrl,
+                        'probabilityScore':
+                            inspectionResult.probabilityScore.toString(),
+                        'modelUsed': inspectionResult.modelUsed.name,
+                        'evaluationDate':
+                            inspectionResult.evaluationDate.toIso8601String(),
+                      },
+                    );
+                  }
+                },
+              ).catchError((error) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.inspectionErrorMessage)),
+                  );
+                }
+              });
+            } catch (e) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(l10n.inspectionErrorMessage)),
+                );
+              }
+            }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(l10n.selectModelAndImagePrompt)),

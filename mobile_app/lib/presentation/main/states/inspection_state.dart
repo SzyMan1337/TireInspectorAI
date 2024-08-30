@@ -16,7 +16,7 @@ class RunInspectionData {
 }
 
 final runInspectionStateProvider =
-    FutureProvider.autoDispose.family<void, RunInspectionData>(
+    FutureProvider.autoDispose.family<InspectionResult, RunInspectionData>(
   (ref, data) {
     return ref
         .watch(tireHealthEvaluationUseCaseProvider)

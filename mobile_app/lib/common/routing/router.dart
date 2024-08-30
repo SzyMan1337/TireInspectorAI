@@ -9,10 +9,12 @@ class AppRouter {
     context,
     RouterNames routerName, {
     Map<String, String> pathParameters = const {},
+    Map<String, String>? queryParameters,
   }) {
     return GoRouter.of(context).pushNamed<T>(
       routerName.name,
       pathParameters: pathParameters,
+      queryParameters: queryParameters ?? {},
     );
   }
 

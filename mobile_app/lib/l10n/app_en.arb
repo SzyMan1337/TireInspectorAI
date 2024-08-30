@@ -85,5 +85,6 @@
   "localModel": "Local Model",
   "cloudModel": "Cloud Model",
   "clickToEditLabel": "Click to edit",
-  "selectModelAndImagePrompt": "Please select a model and upload an image."
+  "selectModelAndImagePrompt": "Please select a model and upload an image.",
+  "inspectionErrorMessage": "An error occurred during the inspection. Please try again."
 }

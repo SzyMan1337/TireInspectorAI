@@ -85,5 +85,6 @@
   "localModel": "Model Lokalny",
   "cloudModel": "Model w Chmurze",
   "clickToEditLabel": "Kliknij, aby edytować",
-  "selectModelAndImagePrompt": "Proszę wybrać model i przesłać obraz."
+  "selectModelAndImagePrompt": "Proszę wybrać model i przesłać obraz.",
+  "inspectionErrorMessage": "Wystąpił błąd podczas inspekcji. Spróbuj ponownie."
 }
