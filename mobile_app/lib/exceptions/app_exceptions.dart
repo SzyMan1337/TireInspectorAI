@@ -25,3 +25,13 @@ class UserNotFoundException extends AppException {
 class UnknownException extends AppException {
   const UnknownException() : super('UNKNOWN', 'An unknown error occurred');
 }
+
+class InspectionNotFoundException extends AppException {
+  const InspectionNotFoundException()
+      : super('INSPECTION_NOT_FOUND', 'Inspection not found');
+}
+
+class CollectionNotFoundException extends AppException {
+  const CollectionNotFoundException()
+      : super('COLLECTION_NOT_FOUND', 'Collection not found');
+}

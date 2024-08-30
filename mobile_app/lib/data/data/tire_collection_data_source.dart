@@ -65,6 +65,41 @@ class _TireCollectionRemoteDataSource implements TireCollectionRepository {
         .doc(collectionId)
         .delete();
   }
+
+  @override
+  Future<TireCollectionDataModel> getCollectionById(
+      String userId, String collectionId) async {
+    try {
+      final doc = await databaseDataSource
+          .collection(CollectionsName.users.name)
+          .doc(userId)
+          .collection(CollectionsName.collections.name)
+          .doc(collectionId)
+          .get();
+
+      if (!doc.exists) {
+        throw const CollectionNotFoundException();
+      }
+
+      final data = TireCollectionDataModel.fromJson(doc.data()!);
+
+      final inspectionsSnapshot = await doc.reference
+          .collection(CollectionsName.inspections.name)
+          .get();
+      final inspectionsCount = inspectionsSnapshot.size;
+
+      return TireCollectionDataModel(
+        id: doc.id,
+        collectionName: data.collectionName,
+        createdAt: data.createdAt,
+        inspectionsCount: inspectionsCount,
+      );
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
+    } catch (e) {
+      throw const UnknownException();
+    }
+  }
 }
 
 final tireCollectionDataSourceProvider = Provider(

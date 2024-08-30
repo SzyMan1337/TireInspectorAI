@@ -14,6 +14,11 @@ abstract interface class TireCollectionUseCase {
     required String userId,
     required String collectionId,
   });
+
+  Future<TireCollection> getCollectionById({
+    required String userId,
+    required String collectionId,
+  });
 }
 
 class _TireCollectionUseCase implements TireCollectionUseCase {
@@ -27,7 +32,9 @@ class _TireCollectionUseCase implements TireCollectionUseCase {
     required TireCollection collection,
   }) {
     return _tireCollectionRepository.createCollection(
-        userId, collection.toDataModel());
+      userId,
+      collection.toDataModel(),
+    );
   }
 
   @override
@@ -45,6 +52,19 @@ class _TireCollectionUseCase implements TireCollectionUseCase {
     required String collectionId,
   }) {
     return _tireCollectionRepository.deleteCollection(userId, collectionId);
+  }
+
+  @override
+  Future<TireCollection> getCollectionById({
+    required String userId,
+    required String collectionId,
+  }) async {
+    final dataModel = await _tireCollectionRepository.getCollectionById(
+      userId,
+      collectionId,
+    );
+
+    return TireCollection.fromDataModel(dataModel);
   }
 }
 

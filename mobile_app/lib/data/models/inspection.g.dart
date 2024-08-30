@@ -8,8 +8,9 @@ part of 'inspection.dart';
 
 InspectionDataModel _$InspectionDataModelFromJson(Map<String, dynamic> json) =>
     InspectionDataModel(
+      id: json['id'] as String,
       imageUrl: json['imageUrl'] as String,
-      isDefective: json['isDefective'] as bool,
+      probabilityScore: (json['probabilityScore'] as num).toDouble(),
       modelUsed: json['modelUsed'] as String,
       addedAt: DateTime.parse(json['addedAt'] as String),
       additionalNotes: json['additionalNotes'] as String?,
@@ -18,8 +19,9 @@ InspectionDataModel _$InspectionDataModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$InspectionDataModelToJson(
         InspectionDataModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'imageUrl': instance.imageUrl,
-      'isDefective': instance.isDefective,
+      'probabilityScore': instance.probabilityScore,
       'modelUsed': instance.modelUsed,
       'addedAt': instance.addedAt.toIso8601String(),
       'additionalNotes': instance.additionalNotes,

@@ -5,33 +5,38 @@ import 'package:tireinspectorai_app/data/models/inspection.dart';
 
 class _InspectionRepository implements InspectionRepository {
   const _InspectionRepository({
-    required this.databaseDataSource,
+    required this.dataSource,
   });
 
-  final InspectionRepository databaseDataSource;
+  final InspectionRepository dataSource;
 
   @override
   Future<void> addInspection(
       String userId, String collectionId, InspectionDataModel inspection) {
-    return databaseDataSource.addInspection(userId, collectionId, inspection);
+    return dataSource.addInspection(userId, collectionId, inspection);
   }
 
   @override
   Stream<List<InspectionDataModel>> getCollectionInspections(
       String userId, String collectionId) {
-    return databaseDataSource.getCollectionInspections(userId, collectionId);
+    return dataSource.getCollectionInspections(userId, collectionId);
   }
 
   @override
   Future<void> deleteInspection(
       String userId, String collectionId, String inspectionId) {
-    return databaseDataSource.deleteInspection(
-        userId, collectionId, inspectionId);
+    return dataSource.deleteInspection(userId, collectionId, inspectionId);
+  }
+
+  @override
+  Future<InspectionDataModel> getInspectionById(
+      String userId, String collectionId, String inspectionId) {
+    return dataSource.getInspectionById(userId, collectionId, inspectionId);
   }
 }
 
 final inspectionRepositoryProvider = Provider<InspectionRepository>(
   (ref) => _InspectionRepository(
-    databaseDataSource: ref.watch(inspectionDataSourceProvider),
+    dataSource: ref.watch(inspectionDataSourceProvider),
   ),
 );

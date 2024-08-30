@@ -11,6 +11,7 @@ export 'usecases/register_usecase.dart';
 export 'usecases/user_usecase.dart';
 export 'usecases/edit_profile_usecase.dart';
 export 'usecases/tire_collection_usecase.dart';
+export 'usecases/inspection_usecase.dart';
 
 // entity
 export 'entity/user.dart';

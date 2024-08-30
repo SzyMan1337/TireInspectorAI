@@ -82,5 +82,6 @@
   "creationDateLabel": "Utworzono {date}",
   "noInspectionsAvailable": "Brak dostępnych inspekcji",
   "inspectionTitle": "Inspekcja",
-  "inspectionDateLabel": "Sprawdzono: {inspectionDate}"
+  "inspectionDateLabel": "Sprawdzono: {inspectionDate}",
+  "inspectionDatePrefix": "Data: "
 }

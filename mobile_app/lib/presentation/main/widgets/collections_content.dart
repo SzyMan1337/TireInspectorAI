@@ -43,6 +43,7 @@ class CollectionsContent extends ConsumerWidget {
                     final collection = collections[index];
                     return CollectionTile(
                       id: collection.id!,
+                      userId: userId,
                       name: collection.name,
                       count: collection.inspectionsCount,
                       onDelete: () => _confirmDeleteCollection(

@@ -63,11 +63,12 @@ final routerConfig = Provider<GoRouter>(
             },
           ),
           GoRoute(
-            path: 'collection/:collectionId',
+            path: 'user/:userId/collection/:collectionId',
             name: RouterNames.collectionPage.name,
             builder: (context, state) {
+              final userId = state.pathParameters['userId']!;
               final collectionId = state.pathParameters['collectionId']!;
-              return CollectionPage(collectionId: collectionId);
+              return CollectionPage(userId: userId, collectionId: collectionId);
             },
           ),
         ],

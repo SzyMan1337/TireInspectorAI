@@ -4,4 +4,5 @@ abstract interface class TireCollectionRepository {
   Future<void> createCollection(String userId, TireCollectionDataModel collection);
   Stream<List<TireCollectionDataModel>> getUserCollections(String userId);
   Future<void> deleteCollection(String userId, String collectionId);
+  Future<TireCollectionDataModel> getCollectionById(String userId, String collectionId);
 }

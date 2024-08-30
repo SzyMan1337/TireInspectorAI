@@ -7,4 +7,6 @@ abstract interface class InspectionRepository {
       String userId, String collectionId);
   Future<void> deleteInspection(
       String userId, String collectionId, String inspectionId);
+  Future<InspectionDataModel> getInspectionById(
+      String userId, String collectionId, String inspectionId);
 }

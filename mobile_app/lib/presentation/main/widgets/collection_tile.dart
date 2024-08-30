@@ -8,12 +8,14 @@ class CollectionTile extends StatelessWidget {
     required this.id,
     required this.name,
     required this.count,
+    required this.userId,
     required this.onDelete,
   });
 
   final String id;
   final String name;
   final int count;
+  final String userId;
   final VoidCallback onDelete;
 
   @override
@@ -28,6 +30,7 @@ class CollectionTile extends StatelessWidget {
           RouterNames.collectionPage,
           pathParameters: {
             'collectionId': id,
+            'userId': userId,
           },
         );
       },

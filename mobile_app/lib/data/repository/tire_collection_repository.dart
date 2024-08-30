@@ -25,6 +25,12 @@ class _TireCollectionRepository implements TireCollectionRepository {
   Future<void> deleteCollection(String userId, String collectionId) {
     return databaseDataSource.deleteCollection(userId, collectionId);
   }
+
+  @override
+  Future<TireCollectionDataModel> getCollectionById(
+      String userId, String collectionId) {
+    return databaseDataSource.getCollectionById(userId, collectionId);
+  }
 }
 
 final tireCollectionRepositoryProvider = Provider<TireCollectionRepository>(

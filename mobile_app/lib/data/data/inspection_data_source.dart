@@ -11,8 +11,8 @@ class _InspectionRemoteDataSource implements InspectionRepository {
   final FirebaseFirestore databaseDataSource;
 
   @override
-  Future<void> addInspection(
-      String userId, String collectionId, InspectionDataModel inspection) async {
+  Future<void> addInspection(String userId, String collectionId,
+      InspectionDataModel inspection) async {
     try {
       final inspectionRef = databaseDataSource
           .collection(CollectionsName.users.name)
@@ -22,7 +22,10 @@ class _InspectionRemoteDataSource implements InspectionRepository {
           .collection(CollectionsName.inspections.name)
           .doc();
 
-      await inspectionRef.set(inspection.toJson());
+      // Set the document ID in the InspectionDataModel
+      final inspectionWithId = inspection.copyWith(id: inspectionRef.id);
+
+      await inspectionRef.set(inspectionWithId.toJson());
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
     } catch (e) {
@@ -40,9 +43,10 @@ class _InspectionRemoteDataSource implements InspectionRepository {
         .doc(collectionId)
         .collection(CollectionsName.inspections.name)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => InspectionDataModel.fromJson(doc.data()))
-            .toList());
+        .map((snapshot) => snapshot.docs.map((doc) {
+              final data = InspectionDataModel.fromJson(doc.data());
+              return data.copyWith(id: doc.id);
+            }).toList());
   }
 
   @override
@@ -56,6 +60,26 @@ class _InspectionRemoteDataSource implements InspectionRepository {
         .collection(CollectionsName.inspections.name)
         .doc(inspectionId)
         .delete();
+  }
+
+  @override
+  Future<InspectionDataModel> getInspectionById(
+      String userId, String collectionId, String inspectionId) async {
+    final doc = await databaseDataSource
+        .collection(CollectionsName.users.name)
+        .doc(userId)
+        .collection(CollectionsName.collections.name)
+        .doc(collectionId)
+        .collection(CollectionsName.inspections.name)
+        .doc(inspectionId)
+        .get();
+
+    if (doc.exists) {
+      final data = InspectionDataModel.fromJson(doc.data()!);
+      return data.copyWith(id: doc.id);
+    } else {
+      throw const InspectionNotFoundException();
+    }
   }
 }
 

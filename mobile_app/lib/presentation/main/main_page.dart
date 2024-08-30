@@ -26,6 +26,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(l10n.loading),
+          centerTitle: true,
         ),
         body: const Center(child: CircularProgressIndicator()),
       );
@@ -35,13 +36,19 @@ class _MainPageState extends ConsumerState<MainPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(l10n.errorTitle),
+          centerTitle: true,
         ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              ref.read(signOutStateProvider);
-            },
-            child: Text(l10n.notLoggedInMessage),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(signOutStateProvider);
+                },
+                child: Text(l10n.notLoggedInMessage),
+              ),
+            ],
           ),
         ),
       );
