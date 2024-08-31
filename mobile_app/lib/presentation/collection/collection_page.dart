@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:tireinspectorai_app/presentation/collection/collection_state.dart';
 
@@ -90,7 +91,14 @@ class CollectionPage extends ConsumerWidget {
                           : Theme.of(context).colorScheme.primary,
                     ),
                     onTap: () {
-                      // TODO: Implement navigation to inspection details page
+                      AppRouter.go(
+                        context,
+                        RouterNames.inspectionDetailsPage,
+                        pathParameters: {
+                          'collectionId': collectionId,
+                          'inspectionId': inspection.id,
+                        },
+                      );
                     },
                   );
                 },

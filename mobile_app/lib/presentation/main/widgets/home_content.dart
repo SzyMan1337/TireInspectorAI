@@ -176,7 +176,7 @@ class HomeContent extends ConsumerWidget {
           items: InspectionModel.values.map((InspectionModel model) {
             return DropdownMenuItem<InspectionModel>(
               value: model,
-              child: Text(_getModelName(model, l10n)),
+              child: Text(Helpers.getModelName(model, l10n)),
             );
           }).toList(),
           onChanged: (model) {
@@ -248,14 +248,5 @@ class HomeContent extends ConsumerWidget {
         child: Text(l10n.inspectButtonLabel),
       ),
     );
-  }
-
-  String _getModelName(InspectionModel model, AppLocalizations l10n) {
-    switch (model) {
-      case InspectionModel.localModel:
-        return l10n.localModel;
-      case InspectionModel.cloudModel:
-        return l10n.cloudModel;
-    }
   }
 }

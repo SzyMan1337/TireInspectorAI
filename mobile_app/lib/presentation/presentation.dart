@@ -11,3 +11,4 @@ export 'main/main_page.dart';
 export 'profile/edit_profile_page.dart';
 export 'collection/collection_page.dart';
 export 'inspection/inspection_result_page.dart';
+export 'inspection/inspection_details_page.dart';

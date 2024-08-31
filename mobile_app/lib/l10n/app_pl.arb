@@ -86,5 +86,19 @@
   "cloudModel": "Model w Chmurze",
   "clickToEditLabel": "Kliknij, aby edytować",
   "selectModelAndImagePrompt": "Proszę wybrać model i przesłać obraz.",
-  "inspectionErrorMessage": "Wystąpił błąd podczas inspekcji. Spróbuj ponownie."
+  "inspectionErrorMessage": "Wystąpił błąd podczas inspekcji. Spróbuj ponownie.",
+  "inspectionResultTitle": "Wynik Inspekcji",
+  "defectiveStatus": "Wadliwy",
+  "goodStatus": "Dobry",
+  "statusLabel": "Stan",
+  "modelUsedLabel": "Użyty Model",
+  "probabilityScoreDescription": "Prawdopodobieństwo Wady",
+  "dateLabel": "Data",
+  "additionalNotesLabel": "Dodatkowe Notatki",
+  "additionalNotesPlaceholder": "Dodatkowe informacje na temat inspekcji...",
+  "selectCollectionLabel": "Wybierz Kolekcję",
+  "selectCollectionPlaceholder": "Wybierz kolekcję",
+  "selectCollectionWarning": "Proszę wybrać kolekcję przed zapisaniem.",
+  "uploadProgressMessage": "{progress}% przesłano...",
+  "saveErrorMessage": "Wystąpił błąd podczas zapisywania inspekcji."
 }

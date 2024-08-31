@@ -20,8 +20,7 @@ class Inspection {
   final String? additionalNotes;
 
   String get image => imageUrl;
-  bool get isDefective =>
-      probabilityScore >= 0.5;
+  bool get isDefective => probabilityScore >= 0.5;
   String get model => modelUsed;
   DateTime get dateAdded => addedAt;
   String? get notes => additionalNotes;
@@ -45,6 +44,24 @@ class Inspection {
       modelUsed: dataModel.modelUsed,
       addedAt: dataModel.addedAt,
       additionalNotes: dataModel.additionalNotes,
+    );
+  }
+
+  Inspection copyWith({
+    String? id,
+    String? imageUrl,
+    double? probabilityScore,
+    String? modelUsed,
+    DateTime? addedAt,
+    String? additionalNotes,
+  }) {
+    return Inspection(
+      id: id ?? this.id,
+      imageUrl: imageUrl ?? this.imageUrl,
+      probabilityScore: probabilityScore ?? this.probabilityScore,
+      modelUsed: modelUsed ?? this.modelUsed,
+      addedAt: addedAt ?? this.addedAt,
+      additionalNotes: additionalNotes ?? this.additionalNotes,
     );
   }
 }

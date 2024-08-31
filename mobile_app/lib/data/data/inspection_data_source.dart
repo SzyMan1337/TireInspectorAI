@@ -11,7 +11,7 @@ class _InspectionRemoteDataSource implements InspectionRepository {
   final FirebaseFirestore databaseDataSource;
 
   @override
-  Future<void> addInspection(String userId, String collectionId,
+  Future<String> addInspection(String userId, String collectionId,
       InspectionDataModel inspection) async {
     try {
       final inspectionRef = databaseDataSource
@@ -22,10 +22,10 @@ class _InspectionRemoteDataSource implements InspectionRepository {
           .collection(CollectionsName.inspections.name)
           .doc();
 
-      // Set the document ID in the InspectionDataModel
       final inspectionWithId = inspection.copyWith(id: inspectionRef.id);
-
       await inspectionRef.set(inspectionWithId.toJson());
+
+      return inspectionRef.id;
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
     } catch (e) {

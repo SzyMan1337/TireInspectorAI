@@ -86,5 +86,19 @@
   "cloudModel": "Cloud Model",
   "clickToEditLabel": "Click to edit",
   "selectModelAndImagePrompt": "Please select a model and upload an image.",
-  "inspectionErrorMessage": "An error occurred during the inspection. Please try again."
+  "inspectionErrorMessage": "An error occurred during the inspection. Please try again.",
+  "inspectionResultTitle": "Inspection Result",
+  "defectiveStatus": "Defective",
+  "goodStatus": "Good",
+  "statusLabel": "Status",
+  "modelUsedLabel": "Model Used",
+  "probabilityScoreDescription": "Defect Probability",
+  "dateLabel": "Date",
+  "additionalNotesLabel": "Additional Notes",
+  "additionalNotesPlaceholder": "Additional information about the inspection...",
+  "selectCollectionLabel": "Select Collection",
+  "selectCollectionPlaceholder": "Choose a collection",
+  "selectCollectionWarning": "Please select a collection before saving.",
+  "uploadProgressMessage": "{progress}% uploaded...",
+  "saveErrorMessage": "An error occurred while saving the inspection."
 }

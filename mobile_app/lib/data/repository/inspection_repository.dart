@@ -11,7 +11,7 @@ class _InspectionRepository implements InspectionRepository {
   final InspectionRepository dataSource;
 
   @override
-  Future<void> addInspection(
+  Future<String> addInspection(
       String userId, String collectionId, InspectionDataModel inspection) {
     return dataSource.addInspection(userId, collectionId, inspection);
   }

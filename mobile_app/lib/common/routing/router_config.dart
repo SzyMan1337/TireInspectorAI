@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/presentation/presentation.dart';
 
 import 'auth_change_provider.dart';
@@ -70,6 +71,20 @@ final routerConfig = Provider<GoRouter>(
               final collectionId = state.pathParameters['collectionId']!;
               return CollectionPage(userId: userId, collectionId: collectionId);
             },
+            routes: [
+              GoRoute(
+                path: 'inspection/:inspectionId',
+                name: RouterNames.inspectionDetailsPage.name,
+                builder: (context, state) {
+                  final collectionId = state.pathParameters['collectionId']!;
+                  final inspectionId = state.pathParameters['inspectionId']!;
+                  return InspectionDetailsPage(
+                    collectionId: collectionId,
+                    inspectionId: inspectionId,
+                  );
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: 'inspection-result',
@@ -78,7 +93,8 @@ final routerConfig = Provider<GoRouter>(
               final imageUrl = state.uri.queryParameters['imageUrl']!;
               final probabilityScore =
                   double.parse(state.uri.queryParameters['probabilityScore']!);
-              final modelUsed = state.uri.queryParameters['modelUsed']!;
+              final modelUsed = Helpers.parseInspectionModel(
+                  state.uri.queryParameters['modelUsed']!);
               final evaluationDate =
                   DateTime.parse(state.uri.queryParameters['evaluationDate']!);
 

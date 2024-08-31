@@ -9,4 +9,5 @@ enum RouterNames {
   editProfilePage,
   collectionPage,
   inspectionResultPage,
+  inspectionDetailsPage,
 }

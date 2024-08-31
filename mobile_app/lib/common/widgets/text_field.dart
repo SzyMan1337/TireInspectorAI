@@ -7,12 +7,16 @@ class AppTextFormField extends StatelessWidget {
     required this.fieldValidator,
     required this.label,
     this.obscureText = false,
+    this.maxLines = 1,
+    this.decoration,
   });
 
   final TextEditingController fieldController;
   final String? Function(String?) fieldValidator;
   final String label;
   final bool obscureText;
+  final int maxLines;
+  final InputDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +24,12 @@ class AppTextFormField extends StatelessWidget {
       controller: fieldController,
       obscureText: obscureText,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-        labelText: label,
-        border: const OutlineInputBorder(),
-      ),
+      maxLines: maxLines,
+      decoration: decoration ??
+          InputDecoration(
+            labelText: label,
+            border: const OutlineInputBorder(),
+          ),
       validator: fieldValidator,
     );
   }
