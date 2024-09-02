@@ -3,24 +3,30 @@ import 'package:tireinspectorai_app/domain/domain.dart';
 
 // Provider to fetch a specific collection by ID
 final collectionProvider =
-    FutureProvider.autoDispose.family<TireCollection, Map<String, String>>(
+    FutureProvider.autoDispose.family<TireCollection, CollectionParams>(
   (ref, params) async {
-    final userId = params['userId']!;
-    final collectionId = params['collectionId']!;
     return ref
         .watch(tireCollectionUseCaseProvider)
-        .getCollectionById(userId: userId, collectionId: collectionId);
+        .getCollectionById(userId: params.userId, collectionId: params.collectionId);
   },
 );
 
 // Provider to fetch inspections for a specific collection
 final inspectionsProvider =
-    StreamProvider.autoDispose.family<List<Inspection>, Map<String, String>>(
+    StreamProvider.autoDispose.family<List<Inspection>, CollectionParams>(
   (ref, params) {
-    final userId = params['userId']!;
-    final collectionId = params['collectionId']!;
     return ref
         .watch(inspectionUseCaseProvider)
-        .getCollectionInspections(userId: userId, collectionId: collectionId);
+        .getCollectionInspections(userId: params.userId, collectionId: params.collectionId);
   },
 );
+
+class CollectionParams {
+  final String userId;
+  final String collectionId;
+
+  CollectionParams({
+    required this.userId,
+    required this.collectionId,
+  });
+}
