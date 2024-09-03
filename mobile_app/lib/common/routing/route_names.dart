@@ -10,4 +10,5 @@ enum RouterNames {
   collectionPage,
   inspectionResultPage,
   inspectionDetailsPage,
+  fullScreenImagePage,
 }

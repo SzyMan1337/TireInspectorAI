@@ -110,6 +110,14 @@ final routerConfig = Provider<GoRouter>(
           ),
         ],
       ),
+      GoRoute(
+        path: '/full-screen-image',
+        name: RouterNames.fullScreenImagePage.name,
+        builder: (context, state) {
+          final imageUrl = state.uri.queryParameters['imageUrl']!;
+          return FullScreenImagePage(imageUrl: imageUrl);
+        },
+      ),
     ],
   ),
 );

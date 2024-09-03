@@ -12,3 +12,4 @@ export 'profile/edit_profile_page.dart';
 export 'collection/collection_page.dart';
 export 'inspection/pages/inspection_result_page.dart';
 export 'inspection/pages/inspection_details_page.dart';
+export 'fullscreen/fullscreen_image_page.dart';

@@ -169,6 +169,21 @@ class CollectionPage extends ConsumerWidget {
                                     width: 90.0,
                                     height: 90.0,
                                     fit: BoxFit.cover,
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      } else {
+                                        return const SizedBox(
+                                          height: 90.0,
+                                          width: 90.0,
+                                          child: Center(
+                                            child:
+                                                CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
                                   title: Text(
                                     Helpers.getModelName(
