@@ -5,6 +5,7 @@ import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:tireinspectorai_app/presentation/collection/collection_state.dart';
+import 'package:tireinspectorai_app/presentation/inspection/states/inspection_details_state.dart';
 import 'package:tireinspectorai_app/presentation/main/states/collections_state.dart';
 
 class CollectionPage extends ConsumerWidget {

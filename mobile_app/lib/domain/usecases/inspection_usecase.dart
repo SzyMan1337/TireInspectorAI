@@ -23,7 +23,7 @@ abstract interface class InspectionUseCase {
     required String inspectionId,
   });
 
-  Future<Inspection?> getInspectionById({
+  Future<Inspection> getInspectionById({
     required String userId,
     required String collectionId,
     required String inspectionId,
@@ -91,7 +91,7 @@ class _InspectionUseCase implements InspectionUseCase {
   }
 
   @override
-  Future<Inspection?> getInspectionById({
+  Future<Inspection> getInspectionById({
     required String userId,
     required String collectionId,
     required String inspectionId,

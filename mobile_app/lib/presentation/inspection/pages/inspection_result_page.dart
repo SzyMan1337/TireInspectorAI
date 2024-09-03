@@ -1,11 +1,12 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tireinspectorai_app/presentation/inspection/inspection_result_state.dart';
+import 'package:tireinspectorai_app/presentation/inspection/states/inspection_result_state.dart';
+import 'package:tireinspectorai_app/presentation/inspection/widgets/inspection_details_section.dart';
+import 'package:tireinspectorai_app/presentation/inspection/widgets/inspection_image_section.dart';
 import 'package:tireinspectorai_app/presentation/main/states/inspection_state.dart';
 import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
 import 'package:tireinspectorai_app/presentation/main/states/collections_state.dart';
@@ -32,11 +33,19 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
   late TextEditingController notesController;
   String? selectedCollection;
   bool isSaving = false;
+  late final InspectionResult inspectionResult;
 
   @override
   void initState() {
     super.initState();
     notesController = TextEditingController();
+
+    inspectionResult = InspectionResult(
+      imageUrl: widget.imageUrl,
+      probabilityScore: widget.probabilityScore,
+      modelUsed: widget.modelUsed,
+      evaluationDate: widget.evaluationDate,
+    );
   }
 
   @override
@@ -93,9 +102,13 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GapWidgets.h24,
-              _buildImageSection(context, l10n),
+              InspectionImageSection(imageUrl: inspectionResult.imageUrl),
               GapWidgets.h24,
-              _buildInspectionDetails(context, l10n),
+              InspectionDetailsSection(
+                probabilityScore: inspectionResult.probabilityScore,
+                modelUsed: inspectionResult.modelUsed,
+                isDefective: inspectionResult.isDefective,
+              ),
               GapWidgets.h24,
               _buildAdditionalNotesSection(context, l10n),
               GapWidgets.h16,
@@ -136,103 +149,6 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
             ),
         ],
       ),
-    );
-  }
-
-  Widget _buildImageSection(BuildContext context, AppLocalizations l10n) {
-    final isFile = !widget.imageUrl.startsWith('http');
-    return Center(
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
-            width: 2.0,
-          ),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: Container(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            child: isFile
-                ? Image.file(
-                    File(widget.imageUrl),
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 200.0,
-                  )
-                : Image.network(
-                    widget.imageUrl,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 200.0,
-                  ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInspectionDetails(BuildContext context, AppLocalizations l10n) {
-    final isDefective = widget.probabilityScore < 0.5;
-    final statusText = isDefective ? l10n.defectiveStatus : l10n.goodStatus;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RichText(
-          text: TextSpan(
-            text: '${l10n.statusLabel}: ',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
-                ),
-            children: [
-              TextSpan(
-                text: statusText,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: isDefective ? Colors.red : Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        GapWidgets.h4,
-        RichText(
-          text: TextSpan(
-            text: '${l10n.modelUsedLabel}: ',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-            children: [
-              TextSpan(
-                text: Helpers.getModelName(widget.modelUsed, l10n),
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.normal,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        GapWidgets.h4,
-        RichText(
-          text: TextSpan(
-            text: '${l10n.probabilityScoreDescription}: ',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-            children: [
-              TextSpan(
-                text: widget.probabilityScore.toStringAsFixed(2),
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.normal,
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 
@@ -329,10 +245,10 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
 
     final inspection = Inspection(
       id: '',
-      imageUrl: widget.imageUrl,
-      probabilityScore: widget.probabilityScore,
-      modelUsed: widget.modelUsed.name,
-      addedAt: widget.evaluationDate,
+      imageUrl: inspectionResult.imageUrl,
+      probabilityScore: inspectionResult.probabilityScore,
+      modelUsed: inspectionResult.modelUsed.name,
+      addedAt: inspectionResult.evaluationDate,
       additionalNotes: notesController.text,
     );
 

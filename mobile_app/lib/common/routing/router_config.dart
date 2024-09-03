@@ -76,9 +76,11 @@ final routerConfig = Provider<GoRouter>(
                 path: 'inspection/:inspectionId',
                 name: RouterNames.inspectionDetailsPage.name,
                 builder: (context, state) {
+                  final userId = state.pathParameters['userId']!;
                   final collectionId = state.pathParameters['collectionId']!;
                   final inspectionId = state.pathParameters['inspectionId']!;
                   return InspectionDetailsPage(
+                    userId: userId,
                     collectionId: collectionId,
                     inspectionId: inspectionId,
                   );

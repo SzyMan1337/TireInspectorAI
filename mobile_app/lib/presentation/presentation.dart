@@ -10,5 +10,5 @@ export 'settings/settings_page.dart';
 export 'main/main_page.dart';
 export 'profile/edit_profile_page.dart';
 export 'collection/collection_page.dart';
-export 'inspection/inspection_result_page.dart';
-export 'inspection/inspection_details_page.dart';
+export 'inspection/pages/inspection_result_page.dart';
+export 'inspection/pages/inspection_details_page.dart';

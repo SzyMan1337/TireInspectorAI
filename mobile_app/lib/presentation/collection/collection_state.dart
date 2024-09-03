@@ -19,17 +19,6 @@ final inspectionsProvider =
   },
 );
 
-final deleteInspectionStateProvider =
-    FutureProvider.autoDispose.family<void, DeleteInspectionData>(
-  (ref, data) async {
-    await ref.watch(inspectionUseCaseProvider).deleteInspection(
-          userId: data.userId,
-          collectionId: data.collectionId,
-          inspectionId: data.inspectionId,
-        );
-  },
-);
-
 class CollectionParams {
   final String userId;
   final String collectionId;
@@ -38,16 +27,4 @@ class CollectionParams {
     required this.userId,
     required this.collectionId,
   });
-}
-
-class DeleteInspectionData {
-  DeleteInspectionData({
-    required this.userId,
-    required this.collectionId,
-    required this.inspectionId,
-  });
-
-  final String userId;
-  final String collectionId;
-  final String inspectionId;
 }
