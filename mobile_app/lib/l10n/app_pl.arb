@@ -100,5 +100,8 @@
   "selectCollectionPlaceholder": "Wybierz kolekcję",
   "selectCollectionWarning": "Proszę wybrać kolekcję przed zapisaniem.",
   "uploadProgressMessage": "{progress}% przesłano...",
-  "saveErrorMessage": "Wystąpił błąd podczas zapisywania inspekcji."
+  "saveErrorMessage": "Wystąpił błąd podczas zapisywania inspekcji.",
+  "deleteConfirmationTitle": "Usuń inspekcję",
+  "deleteConfirmationMessage": "Czy na pewno chcesz usunąć tę inspekcję?",
+  "inspectionDeletedMessage": "Inspekcja została pomyślnie usunięta."
 }

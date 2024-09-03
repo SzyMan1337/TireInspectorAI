@@ -347,6 +347,8 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
           await ref.read(saveInspectionStateProvider(saveData).future);
 
       if (context.mounted) {
+        // Invalidate userCollectionsProvider to ensure the count is updated
+        ref.invalidate(userCollectionsProvider(userId));
         AppRouter.pop(context);
         _clearFormStateOnPreviousPage();
 

@@ -100,5 +100,8 @@
   "selectCollectionPlaceholder": "Choose a collection",
   "selectCollectionWarning": "Please select a collection before saving.",
   "uploadProgressMessage": "{progress}% uploaded...",
-  "saveErrorMessage": "An error occurred while saving the inspection."
+  "saveErrorMessage": "An error occurred while saving the inspection.",
+  "deleteConfirmationTitle": "Delete Inspection",
+  "deleteConfirmationMessage": "Are you sure you want to delete this inspection?",
+  "inspectionDeletedMessage": "Inspection deleted successfully."
 }
