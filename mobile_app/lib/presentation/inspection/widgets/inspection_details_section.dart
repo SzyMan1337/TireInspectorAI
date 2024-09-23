@@ -67,7 +67,7 @@ class InspectionDetailsSection extends StatelessWidget {
                 ),
             children: [
               TextSpan(
-                text: probabilityScore.toStringAsFixed(2),
+                text: '${(probabilityScore * 100).toStringAsFixed(2)}%',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.normal,
                     ),

@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tireinspectorai_app/common/routing/router.dart';
-import 'package:tireinspectorai_app/common/theme/theme.dart';
+import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
@@ -11,6 +10,7 @@ import 'package:tireinspectorai_app/presentation/settings/state/theme_mode_state
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -25,11 +25,14 @@ Future<void> main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     final locale = ref.watch(localeProvider);
+    final modelService = ref.read(modelServiceProvider);
+
+    // Fetch model during app initialization
+    modelService.getModel(); 
 
     return MaterialApp.router(
       title: "Tire Inspector AI",

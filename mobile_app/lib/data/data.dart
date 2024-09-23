@@ -22,3 +22,6 @@ export 'repository/user_repository.dart';
 export 'repository/storage_repository.dart';
 export 'repository/tire_collection_repository.dart';
 export 'repository/inspection_repository.dart';
+
+// utils
+export 'utils/image_processing_helper.dart';
