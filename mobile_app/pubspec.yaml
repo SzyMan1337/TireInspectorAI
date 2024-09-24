@@ -28,6 +28,7 @@ dependencies:
   cached_network_image: ^3.4.1
   logger: ^2.4.0
   image: ^4.2.0
+  http: ^1.2.2
 
 dependency_overrides:
   web: ^1.0.0
