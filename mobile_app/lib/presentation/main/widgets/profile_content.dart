@@ -4,6 +4,7 @@ import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tireinspectorai_app/presentation/main/states/collections_state.dart';
 import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
 
 class ProfileContent extends ConsumerWidget {
@@ -44,7 +45,7 @@ class ProfileContent extends ConsumerWidget {
           GapWidgets.h24,
           _buildProfileHeader(context, appUser),
           GapWidgets.h24,
-          _buildStatisticsSection(context, l10n),
+          _buildStatisticsSection(context, l10n, ref),
           const Spacer(),
           _buildEditProfileButton(context, l10n),
           GapWidgets.h24,
@@ -86,28 +87,33 @@ class ProfileContent extends ConsumerWidget {
     );
   }
 
-  Widget _buildStatisticsSection(BuildContext context, AppLocalizations l10n) {
-    // Example statistics data
-    const inspectedTires = 120;
-    const validTires = 80;
-    const defectiveTires = 40;
+  Widget _buildStatisticsSection(
+      BuildContext context, AppLocalizations l10n, WidgetRef ref) {
+    // Use the provider to fetch statistics
+    final userStatistics = ref.watch(userStatisticsProvider(userId));
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.statisticsTitle,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        GapWidgets.h16,
-        _buildStatisticRow(context, l10n.inspectedTiresLabel, inspectedTires),
-        GapWidgets.h8,
-        _buildStatisticRow(context, l10n.validTiresLabel, validTires),
-        GapWidgets.h8,
-        _buildStatisticRow(context, l10n.defectiveTiresLabel, defectiveTires),
-      ],
+    return userStatistics.when(
+      data: (stats) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.statisticsTitle,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          GapWidgets.h16,
+          _buildStatisticRow(
+              context, l10n.inspectedTiresLabel, stats.inspectedTires),
+          GapWidgets.h8,
+          _buildStatisticRow(context, l10n.validTiresLabel, stats.validTires),
+          GapWidgets.h8,
+          _buildStatisticRow(
+              context, l10n.defectiveTiresLabel, stats.defectiveTires),
+        ],
+      ),
+      loading: () => const CircularProgressIndicator(),
+      error: (e, st) => Text('Error: $e'),
     );
   }
 

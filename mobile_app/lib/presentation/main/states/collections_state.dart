@@ -58,3 +58,21 @@ final deleteCollectionStateProvider =
         );
   },
 );
+
+class UserStatistics {
+  final int inspectedTires;
+  final int validTires;
+  final int defectiveTires;
+
+  UserStatistics({
+    required this.inspectedTires,
+    required this.validTires,
+    required this.defectiveTires,
+  });
+}
+
+final userStatisticsProvider = FutureProvider.family<UserStatistics, String>(
+  (ref, userId) async {
+    return ref.read(userStatisticsUseCaseProvider).fetchUserStatistics(userId);
+  },
+);

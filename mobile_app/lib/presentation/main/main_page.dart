@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tireinspectorai_app/presentation/main/states/collections_state.dart';
 import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/presentation/presentation.dart';
@@ -72,6 +73,9 @@ class _MainPageState extends ConsumerState<MainPage> {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentIndex,
             onTap: (int index) {
+              if (index == 2 && _currentIndex != 2) {
+                ref.invalidate(userStatisticsProvider(currentUser.value!.uid));
+              }
               setState(() {
                 _currentIndex = index;
               });

@@ -13,6 +13,7 @@ export 'usecases/edit_profile_usecase.dart';
 export 'usecases/tire_collection_usecase.dart';
 export 'usecases/inspection_usecase.dart';
 export 'usecases/tire_health_evaluation_usecase.dart';
+export 'usecases/user_statistics_usecase.dart';
 
 // entity
 export 'entity/user.dart';

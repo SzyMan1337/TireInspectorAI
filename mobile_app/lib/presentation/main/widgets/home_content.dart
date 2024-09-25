@@ -109,12 +109,21 @@ class _HomeContentState extends ConsumerState<HomeContent> {
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 8.0, horizontal: 16.0),
                                   child: Center(
-                                    child: Text(
-                                      l10n.clickToEditLabel,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16.0,
-                                      ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.edit,
+                                            color: Colors.white, size: 20.0),
+                                        const SizedBox(width: 8.0),
+                                        Text(
+                                          l10n.clickToEditLabel,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -122,9 +131,26 @@ class _HomeContentState extends ConsumerState<HomeContent> {
                             ],
                           )
                         : Center(
-                            child: Text(
-                              l10n.uploadImagePrompt,
-                              style: Theme.of(context).textTheme.bodyLarge,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.file_upload,
+                                    size: 32.0,
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                Text(
+                                  l10n.uploadImagePrompt,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                   ),
