@@ -35,7 +35,7 @@ class MyApp extends ConsumerWidget {
     final modelService = ref.read(modelServiceProvider);
 
     // Fetch model during app initialization
-    modelService.getModel(); 
+    modelService.getModel();
 
     return MaterialApp.router(
       title: "Tire Inspector AI",
