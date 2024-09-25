@@ -11,6 +11,8 @@ class CommonPageScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.actions,
     this.leading,
+    this.isLoading = false,
+    this.loadingOverlayColor = Colors.black54,
   });
 
   final String title;
@@ -21,29 +23,51 @@ class CommonPageScaffold extends StatelessWidget {
   final Widget? leading;
   final List<Widget>? actions;
   final BottomNavigationBar? bottomNavigationBar;
+  final bool isLoading;
+  final Color loadingOverlayColor;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: key,
-      appBar: AppBar(
-        leading: leading,
-        centerTitle: centerTitle,
-        automaticallyImplyLeading: automaticallyImplyLeading,
-        title: Text(title),
-        actions: actions,
-      ),
-      body: SafeArea(
-        child: withPadding
-            ? Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
+    return Stack(
+      children: [
+        Scaffold(
+          key: key,
+          appBar: AppBar(
+            leading: leading,
+            centerTitle: centerTitle,
+            automaticallyImplyLeading: automaticallyImplyLeading,
+            title: Text(title),
+            actions: actions,
+          ),
+          body: SafeArea(
+            child: withPadding
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                    ),
+                    child: child,
+                  )
+                : child,
+          ),
+          bottomNavigationBar: bottomNavigationBar,
+        ),
+        if (isLoading)
+          Positioned.fill(
+            child: Stack(
+              children: [
+                Container(
+                  color: loadingOverlayColor,
                 ),
-                child: child,
-              )
-            : child,
-      ),
-      bottomNavigationBar: bottomNavigationBar,
+                const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    strokeWidth: 4.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }

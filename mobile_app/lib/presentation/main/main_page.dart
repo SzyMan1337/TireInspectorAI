@@ -16,6 +16,7 @@ class MainPage extends ConsumerStatefulWidget {
 
 class _MainPageState extends ConsumerState<MainPage> {
   int _currentIndex = 0;
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,40 +56,51 @@ class _MainPageState extends ConsumerState<MainPage> {
     }
 
     final List<Widget> pages = [
-      const HomeContent(),
+      HomeContent(onLoadingChange: _handleLoadingChange),
       CollectionsContent(userId: currentUser.value!.uid),
       ProfileContent(userId: currentUser.value!.uid),
     ];
 
-    return Scaffold(
-      appBar: _buildAppBar(context, l10n),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: l10n.homeTab,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: _buildAppBar(context, l10n),
+          body: IndexedStack(
+            index: _currentIndex,
+            children: pages,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.collections),
-            label: l10n.recordsTab,
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home),
+                label: l10n.homeTab,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.collections),
+                label: l10n.recordsTab,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.person),
+                label: l10n.profileTab,
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: l10n.profileTab,
-          ),
-        ],
-      ),
+        ),
+        if (_isLoading) const CommonLoadingIndicator(),
+      ],
     );
+  }
+
+  void _handleLoadingChange(bool isLoading) {
+    setState(() {
+      _isLoading = isLoading;
+    });
   }
 
   AppBar _buildAppBar(BuildContext context, AppLocalizations l10n) {

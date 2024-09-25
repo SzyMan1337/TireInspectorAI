@@ -8,8 +8,8 @@ import 'package:tireinspectorai_app/presentation/inspection/states/inspection_re
 import 'package:tireinspectorai_app/presentation/inspection/widgets/inspection_details_section.dart';
 import 'package:tireinspectorai_app/presentation/inspection/widgets/inspection_image_section.dart';
 import 'package:tireinspectorai_app/presentation/main/states/inspection_state.dart';
-import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
 import 'package:tireinspectorai_app/presentation/main/states/collections_state.dart';
+import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
 
 class InspectionResultPage extends ConsumerStatefulWidget {
   final String imageUrl;
@@ -96,57 +96,33 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
 
     return CommonPageScaffold(
       title: l10n.inspectionResultTitle,
-      child: Stack(
+      isLoading: isSaving,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GapWidgets.h24,
-              InspectionImageSection(imageUrl: inspectionResult.imageUrl),
-              GapWidgets.h24,
-              InspectionDetailsSection(
-                probabilityScore: inspectionResult.probabilityScore,
-                modelUsed: inspectionResult.modelUsed,
-                isDefective: inspectionResult.isDefective,
-              ),
-              GapWidgets.h24,
-              _buildAdditionalNotesSection(context, l10n),
-              GapWidgets.h16,
-              collectionsAsyncValue.when(
-                data: (collections) =>
-                    _buildCollectionDropdown(context, l10n, collections),
-                loading: () => SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.primary,
-                    ),
-                    strokeWidth: 4.0,
-                  ),
-                ),
-                error: (error, stackTrace) => Text(
-                  '${l10n.errorMessage}: $error',
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
-              ),
-              const Spacer(),
-              _buildActionButtons(context, l10n, userId),
-              GapWidgets.h24,
-            ],
+          const SizedBox(height: 24.0),
+          InspectionImageSection(imageUrl: inspectionResult.imageUrl),
+          const SizedBox(height: 24.0),
+          InspectionDetailsSection(
+            probabilityScore: inspectionResult.probabilityScore,
+            modelUsed: inspectionResult.modelUsed,
+            isDefective: inspectionResult.isDefective,
           ),
-          if (isSaving)
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme.of(context).colorScheme.primary,
-                  ),
-                  strokeWidth: 4.0,
-                ),
-              ),
+          const SizedBox(height: 24.0),
+          _buildAdditionalNotesSection(context, l10n),
+          const SizedBox(height: 16.0),
+          collectionsAsyncValue.when(
+            data: (collections) =>
+                _buildCollectionDropdown(context, l10n, collections),
+            loading: () => const CommonLoadingIndicator(),
+            error: (error, stackTrace) => Text(
+              '${l10n.errorMessage}: $error',
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
+          ),
+          const Spacer(),
+          _buildActionButtons(context, l10n, userId),
+          const SizedBox(height: 24.0),
         ],
       ),
     );
@@ -263,7 +239,6 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
           await ref.read(saveInspectionStateProvider(saveData).future);
 
       if (context.mounted) {
-        // Invalidate userCollectionsProvider to ensure the count is updated
         ref.invalidate(userCollectionsProvider(userId));
         AppRouter.pop(context);
         _clearFormStateOnPreviousPage();

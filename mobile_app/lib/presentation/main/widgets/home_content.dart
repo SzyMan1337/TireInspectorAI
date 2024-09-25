@@ -8,15 +8,35 @@ import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tireinspectorai_app/presentation/main/states/inspection_state.dart';
 
-class HomeContent extends ConsumerWidget {
-  const HomeContent({super.key});
+class HomeContent extends ConsumerStatefulWidget {
+  final Function(bool) onLoadingChange;
+
+  const HomeContent({super.key, required this.onLoadingChange});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends ConsumerState<HomeContent> {
+  @override
+  Widget build(BuildContext context) {
     final l10n = ref.watch(localizationProvider);
     final uploadedImagePath = ref.watch(uploadedImagePathProvider);
     final selectedModel = ref.watch(selectedModelProvider);
 
+    return Stack(
+      children: [
+        _buildContent(context, ref, l10n, uploadedImagePath, selectedModel),
+      ],
+    );
+  }
+
+  Widget _buildContent(
+      BuildContext context,
+      WidgetRef ref,
+      AppLocalizations l10n,
+      String? uploadedImagePath,
+      InspectionModel? selectedModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -197,6 +217,10 @@ class HomeContent extends ConsumerWidget {
           final imagePath = ref.read(uploadedImagePathProvider);
 
           if (model != null && imagePath != null) {
+            setState(() {
+              widget.onLoadingChange(true);
+            });
+
             try {
               final inspectionResultAsyncValue = ref.read(
                 runInspectionStateProvider(RunInspectionData(
@@ -208,6 +232,9 @@ class HomeContent extends ConsumerWidget {
               inspectionResultAsyncValue.then(
                 (inspectionResult) {
                   if (context.mounted) {
+                    setState(() {
+                      widget.onLoadingChange(false);
+                    });
                     AppRouter.go(
                       context,
                       RouterNames.inspectionResultPage,
@@ -224,6 +251,9 @@ class HomeContent extends ConsumerWidget {
                 },
               ).catchError((error) {
                 if (context.mounted) {
+                  setState(() {
+                    widget.onLoadingChange(false);
+                  });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(l10n.inspectionErrorMessage)),
                   );
@@ -231,6 +261,9 @@ class HomeContent extends ConsumerWidget {
               });
             } catch (e) {
               if (context.mounted) {
+                setState(() {
+                  widget.onLoadingChange(false);
+                });
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(l10n.inspectionErrorMessage)),
                 );

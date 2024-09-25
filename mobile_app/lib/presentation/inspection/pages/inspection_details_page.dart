@@ -93,6 +93,8 @@ class InspectionDetailsPage extends ConsumerWidget {
                   if (inspection.additionalNotes != null &&
                       inspection.additionalNotes!.isNotEmpty)
                     Container(
+                      width: double
+                          .infinity,
                       padding: const EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
                         color: Theme.of(context)
