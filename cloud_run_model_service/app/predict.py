@@ -68,9 +68,6 @@ def predict():
         # Convert the input data to a numpy array and reshape it to (1, 224, 224, 3)
         input_tensor = np.array(input_data).reshape(1, 224, 224, 3)
 
-        # Optionally normalize the image if your model expects input data in the [0, 1] range
-        input_tensor = input_tensor / 255.0
-
         # Run the model prediction
         output = model.predict(input_tensor)
 
