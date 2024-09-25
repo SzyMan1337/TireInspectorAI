@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart'; // Import logger
@@ -70,6 +71,7 @@ class CloudModelEvaluator implements ModelEvaluator {
 
 final cloudModelEvaluatorProvider = Provider<ModelEvaluator>((ref) {
   final logger = ref.read(loggerProvider);
-  const String functionUrl = 'http://10.0.2.2:8080/predict';
+  final String functionUrl = dotenv.env['API_URL'] ?? 'http://10.0.2.2:8080/predict';
   return CloudModelEvaluator(logger, functionUrl: functionUrl);
 });
+ 
