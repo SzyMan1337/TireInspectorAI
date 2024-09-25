@@ -46,6 +46,8 @@ class _HomeContentState extends ConsumerState<HomeContent> {
           _buildImageUploadSection(context, l10n, uploadedImagePath, ref),
           const SizedBox(height: 24.0),
           _buildModelSelectionDropdown(context, l10n, selectedModel, ref),
+          _buildModelDescription(
+              context, selectedModel, l10n),
           const Spacer(),
           _buildRunInspectionButton(context, l10n, ref),
           const SizedBox(height: 24.0),
@@ -192,6 +194,33 @@ class _HomeContentState extends ConsumerState<HomeContent> {
           ),
         );
       },
+    );
+  }
+
+  Map<InspectionModel, String> _getModelDescriptions(AppLocalizations l10n) {
+    return {
+      InspectionModel.localModel: l10n.localModelDescription,
+      InspectionModel.cloudModel: l10n.cloudModelDescription,
+    };
+  }
+
+  Widget _buildModelDescription(
+      BuildContext context, InspectionModel? model, AppLocalizations l10n) {
+    if (model == null) {
+      return const SizedBox.shrink();
+    }
+
+    Map<InspectionModel, String> descriptions = _getModelDescriptions(l10n);
+    String description = descriptions[model]!;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
+      child: Text(
+        description,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+            ),
+      ),
     );
   }
 

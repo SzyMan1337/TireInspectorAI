@@ -82,8 +82,8 @@
   "inspectionTitle": "Inspection",
   "inspectionDateLabel": "Checked on {date}",
   "inspectionDatePrefix": "Date: ",
-  "localModel": "Local Model",
-  "cloudModel": "Cloud Model",
+  "localModel": "Local Model - MobileNet",
+  "cloudModel": "Cloud Model - ResNet",
   "clickToEditLabel": "Click to edit",
   "selectModelAndImagePrompt": "Please select a model and upload an image.",
   "inspectionErrorMessage": "An error occurred during the inspection. Please try again.",
@@ -103,5 +103,7 @@
   "saveErrorMessage": "An error occurred while saving the inspection.",
   "deleteConfirmationTitle": "Delete Inspection",
   "deleteConfirmationMessage": "Are you sure you want to delete this inspection?",
-  "inspectionDeletedMessage": "Inspection deleted successfully."
+  "inspectionDeletedMessage": "Inspection deleted successfully.",
+  "localModelDescription": "The MobileNet model is specifically designed for efficiency on mobile devices. It's compact yet powerful enough to handle image processing tasks with a high degree of accuracy. Being optimized for low-power devices, it allows for fast, real-time operations directly on your device, making it ideal for applications that require immediate results without an internet connection.",
+  "cloudModelDescription": "The ResNet model is known for its depth and accuracy in handling complex image recognition tasks. Operating from a cloud-based server, it utilizes extensive computational resources to analyze images, making it well-suited for applications where precision is critical. This model requires an active internet connection to upload images to the cloud, where processing occurs, and detailed results are sent back to the device."
 }

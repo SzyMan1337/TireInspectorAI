@@ -82,8 +82,8 @@
   "inspectionTitle": "Inspekcja",
   "inspectionDateLabel": "Sprawdzono: {inspectionDate}",
   "inspectionDatePrefix": "Data: ",
-  "localModel": "Model Lokalny",
-  "cloudModel": "Model w Chmurze",
+  "localModel": "Model Lokalny - MobileNet",
+  "cloudModel": "Model w Chmurze - ResNet",
   "clickToEditLabel": "Kliknij, aby edytować",
   "selectModelAndImagePrompt": "Proszę wybrać model i przesłać obraz.",
   "inspectionErrorMessage": "Wystąpił błąd podczas inspekcji. Spróbuj ponownie.",
@@ -103,5 +103,7 @@
   "saveErrorMessage": "Wystąpił błąd podczas zapisywania inspekcji.",
   "deleteConfirmationTitle": "Usuń inspekcję",
   "deleteConfirmationMessage": "Czy na pewno chcesz usunąć tę inspekcję?",
-  "inspectionDeletedMessage": "Inspekcja została pomyślnie usunięta."
+  "inspectionDeletedMessage": "Inspekcja została pomyślnie usunięta.",
+  "localModelDescription": "Model MobileNet jest specjalnie zaprojektowany do efektywnej pracy na urządzeniach mobilnych. Jest kompaktowy, lecz wystarczająco mocny, aby poradzić sobie z zadaniem przetwarzania obrazów z dużą dokładnością. Zoptymalizowany pod kątem urządzeń o niskiej mocy, umożliwia szybkie operacje w czasie rzeczywistym bezpośrednio na urządzeniu, co czyni go idealnym dla aplikacji wymagających natychmiastowych wyników bez dostępu do internetu.",
+  "cloudModelDescription": "Model ResNet jest znany z głębi i dokładności w obsłudze złożonych zadań rozpoznawania obrazów. Działając z serwera w chmurze, wykorzystuje rozległe zasoby obliczeniowe do analizy obrazów, co sprawia, że doskonale nadaje się do aplikacji, gdzie precyzja jest kluczowa. Ten model wymaga aktywnego połączenia z internetem, aby przesłać obrazy do chmury, gdzie są przetwarzane, a szczegółowe wyniki są wysyłane z powrotem na urządzenie."
 }
