@@ -26,7 +26,10 @@ class _HomeContentState extends ConsumerState<HomeContent> {
 
     return Stack(
       children: [
-        _buildContent(context, ref, l10n, uploadedImagePath, selectedModel),
+        SingleChildScrollView(
+          child: _buildContent(
+              context, ref, l10n, uploadedImagePath, selectedModel),
+        ),
       ],
     );
   }
@@ -42,15 +45,14 @@ class _HomeContentState extends ConsumerState<HomeContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 24.0),
+          GapWidgets.h24,
           _buildImageUploadSection(context, l10n, uploadedImagePath, ref),
-          const SizedBox(height: 24.0),
+          GapWidgets.h24,
           _buildModelSelectionDropdown(context, l10n, selectedModel, ref),
-          _buildModelDescription(
-              context, selectedModel, l10n),
-          const Spacer(),
+          _buildModelDescription(context, selectedModel, l10n),
+          GapWidgets.h24,
           _buildRunInspectionButton(context, l10n, ref),
-          const SizedBox(height: 24.0),
+          GapWidgets.h24,
         ],
       ),
     );

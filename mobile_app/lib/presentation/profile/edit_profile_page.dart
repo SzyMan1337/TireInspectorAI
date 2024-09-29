@@ -63,19 +63,21 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
 
     return CommonPageScaffold(
       title: l10n.editProfileTitle,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GapWidgets.h24,
-            _buildProfileImageSection(context, ref, l10n, appUser.avatar),
-            GapWidgets.h48,
-            _buildDisplayNameField(context, l10n),
-            const Spacer(),
-            _buildSaveButton(context, l10n),
-            GapWidgets.h48,
-          ],
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GapWidgets.h24,
+              _buildProfileImageSection(context, ref, l10n, appUser.avatar),
+              GapWidgets.h48,
+              _buildDisplayNameField(context, l10n),
+              const SizedBox(height: 24.0),
+              _buildSaveButton(context, l10n),
+              GapWidgets.h48,
+            ],
+          ),
         ),
       ),
     );

@@ -76,55 +76,56 @@ class InspectionDetailsPage extends ConsumerWidget {
             );
           } else if (snapshot.hasData) {
             final inspection = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InspectionImageSection(imageUrl: inspection.imageUrl),
-                  GapWidgets.h24,
-                  InspectionDetailsSection(
-                    probabilityScore: inspection.probabilityScore,
-                    modelUsed:
-                        Helpers.parseInspectionModel(inspection.modelUsed),
-                    isDefective: inspection.isDefective,
-                  ),
-                  GapWidgets.h24,
-                  if (inspection.additionalNotes != null &&
-                      inspection.additionalNotes!.isNotEmpty)
-                    Container(
-                      width: double
-                          .infinity,
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest
-                            .withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.primary,
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InspectionImageSection(imageUrl: inspection.imageUrl),
+                    GapWidgets.h24,
+                    InspectionDetailsSection(
+                      probabilityScore: inspection.probabilityScore,
+                      modelUsed:
+                          Helpers.parseInspectionModel(inspection.modelUsed),
+                      isDefective: inspection.isDefective,
+                    ),
+                    GapWidgets.h24,
+                    if (inspection.additionalNotes != null &&
+                        inspection.additionalNotes!.isNotEmpty)
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHighest
+                              .withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.additionalNotesLabel,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 8.0),
+                            Text(
+                              inspection.additionalNotes!,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            l10n.additionalNotesLabel,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            inspection.additionalNotes!,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             );
           } else {

@@ -13,6 +13,7 @@ class CommonPageScaffold extends StatelessWidget {
     this.leading,
     this.isLoading = false,
     this.loadingOverlayColor = Colors.black54,
+    this.isScrollable = false,
   });
 
   final String title;
@@ -25,9 +26,23 @@ class CommonPageScaffold extends StatelessWidget {
   final BottomNavigationBar? bottomNavigationBar;
   final bool isLoading;
   final Color loadingOverlayColor;
+  final bool isScrollable;
 
   @override
   Widget build(BuildContext context) {
+    Widget content = withPadding
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: child,
+          )
+        : child;
+
+    if (isScrollable) {
+      content = SingleChildScrollView(
+        child: content,
+      );
+    }
+
     return Stack(
       children: [
         Scaffold(
@@ -40,14 +55,7 @@ class CommonPageScaffold extends StatelessWidget {
             actions: actions,
           ),
           body: SafeArea(
-            child: withPadding
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0,
-                    ),
-                    child: child,
-                  )
-                : child,
+            child: content,
           ),
           bottomNavigationBar: bottomNavigationBar,
         ),

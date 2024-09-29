@@ -37,19 +37,21 @@ class ProfileContent extends ConsumerWidget {
 
     final appUser = user.value!;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GapWidgets.h24,
-          _buildProfileHeader(context, appUser),
-          GapWidgets.h24,
-          _buildStatisticsSection(context, l10n, ref),
-          const Spacer(),
-          _buildEditProfileButton(context, l10n),
-          GapWidgets.h24,
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GapWidgets.h24,
+            _buildProfileHeader(context, appUser),
+            GapWidgets.h24,
+            _buildStatisticsSection(context, l10n, ref),
+            const SizedBox(height: 24.0),
+            _buildEditProfileButton(context, l10n),
+            GapWidgets.h24,
+          ],
+        ),
       ),
     );
   }
@@ -89,7 +91,6 @@ class ProfileContent extends ConsumerWidget {
 
   Widget _buildStatisticsSection(
       BuildContext context, AppLocalizations l10n, WidgetRef ref) {
-    // Use the provider to fetch statistics
     final userStatistics = ref.watch(userStatisticsProvider(userId));
 
     return userStatistics.when(

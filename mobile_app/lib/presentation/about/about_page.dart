@@ -14,6 +14,7 @@ class AboutPage extends ConsumerWidget {
 
     return CommonPageScaffold(
       title: l10n.about,
+      isScrollable: true,
       withPadding: false,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

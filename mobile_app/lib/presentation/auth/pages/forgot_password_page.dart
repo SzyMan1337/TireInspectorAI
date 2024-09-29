@@ -34,6 +34,7 @@ class ForgotPasswordPage extends ConsumerWidget with EmailPassValidators {
     );
     return CommonPageScaffold(
       title: l10n.forgotPassword,
+      isScrollable: true,
       child: Form(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

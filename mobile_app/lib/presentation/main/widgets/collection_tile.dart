@@ -62,14 +62,18 @@ class CollectionTile extends StatelessWidget {
                       color: colorScheme.primary,
                     ),
                     const SizedBox(height: 8.0),
-                    Text(
-                      name,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
+                    Flexible(
+                      child: Text(
+                        name,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 4.0),
                     Text(

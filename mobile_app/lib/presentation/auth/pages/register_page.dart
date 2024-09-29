@@ -34,6 +34,7 @@ class RegisterPage extends ConsumerWidget {
 
     return CommonPageScaffold(
       title: l10n.signUpTitle,
+      isScrollable: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

@@ -41,6 +41,7 @@ class LoginPage extends ConsumerWidget {
 
     return CommonPageScaffold(
       title: l10n.loginTitle,
+      isScrollable: true,
       child: loginState.isLoading
           ? const Center(
               child: CircularProgressIndicator(),
