@@ -6,6 +6,17 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>GIDClientID</key>
+    <string>924072389290-j78o2v8683lifu71r00epq52mr5f6pcp.apps.googleusercontent.com</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.924072389290-j78o2v8683lifu71r00epq52mr5f6pcp</string>
+        </array>
+      </dict>
+    </array>
 	<key>CFBundleDisplayName</key>
 	<string>Tireinspectorai App</string>
 	<key>CFBundleExecutable</key>
