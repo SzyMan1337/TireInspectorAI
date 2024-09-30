@@ -14,21 +14,25 @@ class AboutPage extends ConsumerWidget {
 
     return CommonPageScaffold(
       title: l10n.about,
-      isScrollable: true,
+      isScrollable: false, // Wyłącz przewijanie w CommonPageScaffold
       withPadding: false,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeaderImage(),
-              GapWidgets.h8,
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: _buildAboutText(context, l10n),
+          Expanded(
+            // Zajmuje resztę dostępnej przestrzeni
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeaderImage(),
+                  GapWidgets.h8,
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: _buildAboutText(context, l10n),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),

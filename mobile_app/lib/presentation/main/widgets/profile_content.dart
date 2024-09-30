@@ -37,21 +37,30 @@ class ProfileContent extends ConsumerWidget {
 
     final appUser = user.value!;
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GapWidgets.h24,
-            _buildProfileHeader(context, appUser),
-            GapWidgets.h24,
-            _buildStatisticsSection(context, l10n, ref),
-            const SizedBox(height: 24.0),
-            _buildEditProfileButton(context, l10n),
-            GapWidgets.h24,
-          ],
-        ),
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GapWidgets.h24,
+                    _buildProfileHeader(context, appUser),
+                    GapWidgets.h24,
+                    _buildStatisticsSection(context, l10n, ref),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: _buildEditProfileButton(context, l10n),
+          ),
+        ],
       ),
     );
   }

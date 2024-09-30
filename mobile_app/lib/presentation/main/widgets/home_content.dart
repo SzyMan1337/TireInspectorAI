@@ -24,35 +24,32 @@ class _HomeContentState extends ConsumerState<HomeContent> {
     final uploadedImagePath = ref.watch(uploadedImagePathProvider);
     final selectedModel = ref.watch(selectedModelProvider);
 
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          child: _buildContent(
-              context, ref, l10n, uploadedImagePath, selectedModel),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildContent(
-      BuildContext context,
-      WidgetRef ref,
-      AppLocalizations l10n,
-      String? uploadedImagePath,
-      InspectionModel? selectedModel) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      body: Column(
         children: [
-          GapWidgets.h24,
-          _buildImageUploadSection(context, l10n, uploadedImagePath, ref),
-          GapWidgets.h24,
-          _buildModelSelectionDropdown(context, l10n, selectedModel, ref),
-          _buildModelDescription(context, selectedModel, l10n),
-          GapWidgets.h24,
-          _buildRunInspectionButton(context, l10n, ref),
-          GapWidgets.h24,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GapWidgets.h24,
+                    _buildImageUploadSection(
+                        context, l10n, uploadedImagePath, ref),
+                    GapWidgets.h24,
+                    _buildModelSelectionDropdown(
+                        context, l10n, selectedModel, ref),
+                    _buildModelDescription(context, selectedModel, l10n),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: _buildRunInspectionButton(context, l10n, ref),
+          ),
         ],
       ),
     );

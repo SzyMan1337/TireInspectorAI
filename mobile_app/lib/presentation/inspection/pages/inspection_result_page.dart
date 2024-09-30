@@ -97,35 +97,42 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
     return CommonPageScaffold(
       title: l10n.inspectionResultTitle,
       isLoading: isSaving,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 24.0),
-            InspectionImageSection(imageUrl: inspectionResult.imageUrl),
-            const SizedBox(height: 24.0),
-            InspectionDetailsSection(
-              probabilityScore: inspectionResult.probabilityScore,
-              modelUsed: inspectionResult.modelUsed,
-              isDefective: inspectionResult.isDefective,
-            ),
-            const SizedBox(height: 24.0),
-            _buildAdditionalNotesSection(context, l10n),
-            const SizedBox(height: 16.0),
-            collectionsAsyncValue.when(
-              data: (collections) =>
-                  _buildCollectionDropdown(context, l10n, collections),
-              loading: () => const CommonLoadingIndicator(),
-              error: (error, stackTrace) => Text(
-                '${l10n.errorMessage}: $error',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   GapWidgets.h24,
+                  InspectionImageSection(imageUrl: inspectionResult.imageUrl),
+                  GapWidgets.h24,
+                  InspectionDetailsSection(
+                    probabilityScore: inspectionResult.probabilityScore,
+                    modelUsed: inspectionResult.modelUsed,
+                    isDefective: inspectionResult.isDefective,
+                  ),
+                   GapWidgets.h24,
+                  _buildAdditionalNotesSection(context, l10n),
+                   GapWidgets.h16,
+                  collectionsAsyncValue.when(
+                    data: (collections) =>
+                        _buildCollectionDropdown(context, l10n, collections),
+                    loading: () => const CommonLoadingIndicator(),
+                    error: (error, stackTrace) => Text(
+                      '${l10n.errorMessage}: $error',
+                      style:
+                          TextStyle(color: Theme.of(context).colorScheme.error),
+                    ),
+                  ),
+                   GapWidgets.h24,
+                ],
               ),
             ),
-            const SizedBox(height: 24.0),
-            _buildActionButtons(context, l10n, userId),
-            const SizedBox(height: 24.0),
-          ],
-        ),
+          ),
+          _buildActionButtons(context, l10n, userId),
+          GapWidgets.h24,
+        ],
       ),
     );
   }
@@ -155,15 +162,13 @@ class InspectionResultPageState extends ConsumerState<InspectionResultPage> {
       List<TireCollection> collections) {
     return DropdownButtonFormField<String>(
       value: selectedCollection,
-      isExpanded:
-          true,
+      isExpanded: true,
       items: collections.map((collection) {
         return DropdownMenuItem(
           value: collection.id,
           child: Text(
             collection.collectionName,
-            overflow: TextOverflow
-                .ellipsis,
+            overflow: TextOverflow.ellipsis,
           ),
         );
       }).toList(),

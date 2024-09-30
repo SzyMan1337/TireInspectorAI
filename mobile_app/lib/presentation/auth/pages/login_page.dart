@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/exceptions/app_exceptions.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
+import 'package:tireinspectorai_app/presentation/utils/screen_utils.dart';
 
 import '../state/login_state.dart';
 import '../widgets/social_login.dart';
@@ -39,83 +40,89 @@ class LoginPage extends ConsumerWidget {
       },
     );
 
-    return CommonPageScaffold(
-      title: l10n.loginTitle,
-      isScrollable: true,
-      child: loginState.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const WelcomeText(),
-                GapWidgets.h16,
-                UserPassForm(
-                  buttonLabel: l10n.login,
-                  onFormSubmit: (
-                    String email,
-                    String password,
-                  ) async {
-                    ref
-                        .read(
-                          loginStateProvider.notifier,
-                        )
-                        .loginWithEmailPassword(
-                          email,
-                          password,
-                        );
-                  },
-                ),
-                Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmallScreen = ScreenUtils.isSmallScreen(constraints);
+
+        return CommonPageScaffold(
+          title: l10n.loginTitle,
+          isScrollable: isSmallScreen,
+          child: loginState.isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(l10n.dontHaveAccount),
-                    TextButton(
-                      onPressed: () {
-                        AppRouter.go(
-                          context,
-                          RouterNames.registerPage,
-                        );
+                    const WelcomeText(),
+                    GapWidgets.h16,
+                    UserPassForm(
+                      buttonLabel: l10n.login,
+                      onFormSubmit: (
+                        String email,
+                        String password,
+                      ) async {
+                        ref
+                            .read(
+                              loginStateProvider.notifier,
+                            )
+                            .loginWithEmailPassword(
+                              email,
+                              password,
+                            );
                       },
-                      child: Text(l10n.signUp),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(l10n.dontHaveAccount),
+                        TextButton(
+                          onPressed: () {
+                            AppRouter.go(
+                              context,
+                              RouterNames.registerPage,
+                            );
+                          },
+                          child: Text(l10n.signUp),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            AppRouter.go(
+                              context,
+                              RouterNames.forgotPasswordPage,
+                            );
+                          },
+                          child: Text(l10n.forgotPassword),
+                        ),
+                      ],
+                    ),
+                    GapWidgets.h8,
+                    Text(l10n.orLoginWith),
+                    SocialLogin(
+                      onGooglePressed: () {
+                        ref
+                            .read(
+                              loginStateProvider.notifier,
+                            )
+                            .signInGoogle();
+                      },
+                      onApplePressed: () {
+                        ref
+                            .read(
+                              loginStateProvider.notifier,
+                            )
+                            .signInApple();
+                      },
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        AppRouter.go(
-                          context,
-                          RouterNames.forgotPasswordPage,
-                        );
-                      },
-                      child: Text(l10n.forgotPassword),
-                    ),
-                  ],
-                ),
-                GapWidgets.h8,
-                Text(l10n.orLoginWith),
-                SocialLogin(
-                  onGooglePressed: () {
-                    ref
-                        .read(
-                          loginStateProvider.notifier,
-                        )
-                        .signInGoogle();
-                  },
-                  onApplePressed: () {
-                    ref
-                        .read(
-                          loginStateProvider.notifier,
-                        )
-                        .signInApple();
-                  },
-                ),
-              ],
-            ),
+        );
+      },
     );
   }
 }
