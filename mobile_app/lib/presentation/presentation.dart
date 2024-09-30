@@ -15,4 +15,4 @@ export 'inspection/pages/inspection_details_page.dart';
 export 'fullscreen/fullscreen_image_page.dart';
 
 // utils
-export 'utils/screen_utils.dart ';
+export 'utils/screen_utils.dart';
