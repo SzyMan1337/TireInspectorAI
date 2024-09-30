@@ -62,13 +62,39 @@ class _AuthRepository implements AuthRepository {
   }
 
   @override
-  Future<CurrentUserDataModel> loginWithApple() {
-    return _authDataSource.loginWithApple();
+  Future<CurrentUserDataModel> loginWithApple() async {
+    final user = await _authDataSource.loginWithApple();
+
+    final userExists = await _userDataSource.userExists(user.uid);
+    if (!userExists) {
+      await _userDataSource.createUser(
+        UserInfoDataModel(
+          uid: user.uid,
+          email: user.email!,
+          displayName: user.displayName,
+        ),
+      );
+    }
+
+    return user;
   }
 
   @override
-  Future<CurrentUserDataModel> loginWithGoogle() {
-    return _authDataSource.loginWithGoogle();
+  Future<CurrentUserDataModel> loginWithGoogle() async {
+    final user = await _authDataSource.loginWithGoogle();
+
+    final userExists = await _userDataSource.userExists(user.uid);
+    if (!userExists) {
+      await _userDataSource.createUser(
+        UserInfoDataModel(
+          uid: user.uid,
+          email: user.email!,
+          displayName: user.displayName,
+        ),
+      );
+    }
+
+    return user;
   }
 
   @override

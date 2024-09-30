@@ -22,7 +22,7 @@ class _UserUseCase implements UserUseCase {
   }
 
   @override
-  Stream<AppUser> getCurrentUserInfo() {
+  Stream<AppUser> getCurrentUserInfo() { 
     final user = _authRepository.currentUser;
     return _userRepository
         .getExtraUserInfo(

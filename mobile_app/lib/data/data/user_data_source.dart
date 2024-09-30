@@ -70,6 +70,21 @@ class _UserRemoteDataSource implements UserRepository {
       },
     );
   }
+
+  @override
+  Future<bool> userExists(String uid) async {
+    try {
+      final doc = await databaseDataSource
+          .collection(CollectionsName.users.name)
+          .doc(uid)
+          .get();
+      return doc.exists;
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
+    } catch (e) {
+      throw const UnknownException();
+    }
+  }
 }
 
 final userDataSourceProvider = Provider(

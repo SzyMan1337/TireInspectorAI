@@ -36,6 +36,11 @@ class _UserRepository implements UserRepository {
       displayName: displayName,
     );
   }
+
+  @override
+  Future<bool> userExists(String uid) {
+    return databaseDataSource.userExists(uid);
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>(

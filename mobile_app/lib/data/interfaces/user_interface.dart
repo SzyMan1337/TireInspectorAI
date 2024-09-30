@@ -11,4 +11,5 @@ abstract interface class UserRepository {
     required String uid,
     required String displayName,
   });
+  Future<bool> userExists(String uid);
 }

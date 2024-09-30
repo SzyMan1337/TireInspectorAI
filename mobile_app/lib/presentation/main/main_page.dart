@@ -35,25 +35,11 @@ class _MainPageState extends ConsumerState<MainPage> {
     }
 
     if (!currentUser.hasValue || currentUser.hasError) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(l10n.errorTitle),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(signOutStateProvider);
-                },
-                child: Text(l10n.notLoggedInMessage),
-              ),
-            ],
-          ),
-        ),
-      );
+      ref.read(signOutStateProvider);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        AppRouter.go(context, RouterNames.loginPage);
+      });
+      return const SizedBox.shrink();
     }
 
     final List<Widget> pages = [
