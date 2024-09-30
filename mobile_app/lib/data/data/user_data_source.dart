@@ -31,19 +31,25 @@ class _UserRemoteDataSource implements UserRepository {
   }
 
   @override
-  Stream<UserInfoDataModel> getExtraUserInfo(String uid) {
+  Stream<UserInfoDataModel?> getExtraUserInfo(String uid) {
     return databaseDataSource
         .collection(CollectionsName.users.name)
         .doc(uid)
         .snapshots()
         .map(
-          (event) => UserInfoDataModel.fromJson(
+      (event) {
+        if (event.exists && event.data() != null) {
+          return UserInfoDataModel.fromJson(
             {
               ...event.data()!,
               'uid': event.id,
             },
-          ),
-        );
+          );
+        } else {
+          return null;
+        }
+      },
+    );
   }
 
   @override

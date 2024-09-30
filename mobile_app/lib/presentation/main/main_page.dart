@@ -34,11 +34,10 @@ class _MainPageState extends ConsumerState<MainPage> {
       );
     }
 
-    if (!currentUser.hasValue || currentUser.hasError) {
+    if (!currentUser.hasValue ||
+        currentUser.hasError ||
+        currentUser.value == null) {
       ref.read(signOutStateProvider);
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        AppRouter.go(context, RouterNames.loginPage);
-      });
       return const SizedBox.shrink();
     }
 

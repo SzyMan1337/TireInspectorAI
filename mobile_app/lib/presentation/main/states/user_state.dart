@@ -7,7 +7,7 @@ final signOutStateProvider = Provider<Future<void>>(
   },
 );
 
-final currentUserStateProvider = StreamProvider.autoDispose<AppUser>(
+final currentUserStateProvider = StreamProvider.autoDispose<AppUser?>(
   (ref) {
     return ref
         .watch(

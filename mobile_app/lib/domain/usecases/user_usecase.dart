@@ -4,7 +4,7 @@ import 'package:tireinspectorai_app/domain/domain.dart';
 
 abstract interface class UserUseCase {
   Future<void> signOut();
-  Stream<AppUser> getCurrentUserInfo();
+  Stream<AppUser?> getCurrentUserInfo();
 }
 
 class _UserUseCase implements UserUseCase {
@@ -22,15 +22,18 @@ class _UserUseCase implements UserUseCase {
   }
 
   @override
-  Stream<AppUser> getCurrentUserInfo() { 
+  Stream<AppUser?> getCurrentUserInfo() {
     final user = _authRepository.currentUser;
-    return _userRepository
-        .getExtraUserInfo(
-          user.uid,
-        )
-        .map(
-          (userDataModel) => AppUser.fromUserInfoDataModel(userDataModel),
-        );
+
+    return _userRepository.getExtraUserInfo(user.uid).map((userDataModel) {
+      if (userDataModel == null) {
+        return null;
+      } else {
+        return AppUser.fromUserInfoDataModel(userDataModel);
+      }
+    }).handleError((error) {
+      throw Exception('Error fetching AppUser: $error');
+    });
   }
 }
 
