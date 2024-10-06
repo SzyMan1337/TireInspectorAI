@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
 import 'package:tireinspectorai_app/exceptions/app_exceptions.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
+import 'package:tireinspectorai_app/presentation/auth/state/login_state.dart';
+import 'package:tireinspectorai_app/presentation/auth/widgets/social_login.dart';
 import 'package:tireinspectorai_app/presentation/utils/screen_utils.dart';
 
 import '../state/register_state.dart';
@@ -45,11 +47,14 @@ class RegisterPage extends ConsumerWidget {
             children: <Widget>[
               const WelcomeText(),
               GapWidgets.h48,
-              registerState.isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : UserPassForm(
+              if (registerState.isLoading)
+                const Center(
+                  child: CircularProgressIndicator(),
+                )
+              else
+                Column(
+                  children: [
+                    UserPassForm(
                       buttonLabel: l10n.signUp,
                       onFormSubmit: (String email, String password) {
                         ref
@@ -62,7 +67,27 @@ class RegisterPage extends ConsumerWidget {
                             );
                       },
                     ),
-              GapWidgets.h48,
+                    GapWidgets.h16,
+                    Text(l10n.orLoginWith),
+                    SocialLogin(
+                      onGooglePressed: () {
+                        ref
+                            .read(
+                              loginStateProvider.notifier,
+                            )
+                            .signInGoogle();
+                      },
+                      onApplePressed: () {
+                        ref
+                            .read(
+                              loginStateProvider.notifier,
+                            )
+                            .signInApple();
+                      },
+                    ),
+                    GapWidgets.h48,
+                  ],
+                ),
             ],
           ),
         );

@@ -178,8 +178,7 @@ class CollectionPage extends ConsumerWidget {
                                           height: 90.0,
                                           width: 90.0,
                                           child: Center(
-                                            child:
-                                                CircularProgressIndicator(),
+                                            child: CircularProgressIndicator(),
                                           ),
                                         );
                                       }
@@ -197,11 +196,13 @@ class CollectionPage extends ConsumerWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${l10n.probabilityScoreDescription}: ${inspection.probabilityScore.toStringAsFixed(2)}',
+                                        '${l10n.probabilityScoreDescription}: ${(inspection.probabilityScore * 100).toStringAsFixed(2)}%',
                                         style: theme.textTheme.bodySmall,
                                       ),
                                       Text(
-                                        DateFormat.yMMMMd()
+                                        DateFormat.yMMMMd(
+                                                Localizations.localeOf(context)
+                                                    .toString())
                                             .format(inspection.dateAdded),
                                         style: theme.textTheme.bodySmall,
                                       ),

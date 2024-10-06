@@ -41,7 +41,8 @@ class InspectionDetailsPage extends ConsumerWidget {
             } else if (snapshot.hasData) {
               final inspection = snapshot.data!;
               final formattedDate =
-                  DateFormat.yMMMMd().format(inspection.addedAt);
+                  DateFormat.yMMMMd(Localizations.localeOf(context).toString())
+                      .format(inspection.addedAt);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
