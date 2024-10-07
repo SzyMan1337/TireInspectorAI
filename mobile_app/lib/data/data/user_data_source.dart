@@ -1,6 +1,7 @@
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/constants/collections.dart';
+import 'package:tireinspectorai_app/data/models/tire_collection.dart';
 import 'package:tireinspectorai_app/data/models/userinfo.dart';
 
 import '../../exceptions/app_exceptions.dart';
@@ -14,15 +15,32 @@ class _UserRemoteDataSource implements UserRepository {
   final FirebaseFirestore databaseDataSource;
 
   @override
-  Future<void> createUser(UserInfoDataModel user) {
+  Future<void> createUser(UserInfoDataModel user) async {
     try {
-      return databaseDataSource
+      // Create user in the Firestore
+      await databaseDataSource
           .collection(CollectionsName.users.name)
           .doc(user.uid)
           .set(
             user.toJson(),
             SetOptions(merge: true),
           );
+
+      final collectionRef = databaseDataSource
+          .collection(CollectionsName.users.name)
+          .doc(user.uid)
+          .collection(CollectionsName.collections.name)
+          .doc();
+
+      // Create a default TireCollectionDataModel with default values
+      final defaultCollection = TireCollectionDataModel(
+        id: collectionRef.id,
+        collectionName: 'MyTires',
+        createdAt: DateTime.now(),
+      );
+
+      // Save the default collection in the Firestore
+      await collectionRef.set(defaultCollection.toJson());
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
     } catch (e) {
