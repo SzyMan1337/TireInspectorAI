@@ -1,16 +1,8 @@
 # tireinspectorai_app
 
-A new Flutter project.
 
-## Getting Started
+## Icon Attribution
 
-This project is a starting point for a Flutter application.
+This project uses an icon from Freepik. Please attribute the icon as follows:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Icon by [surang from Freepik](https://www.freepik.com/icon/inspection_4846000).

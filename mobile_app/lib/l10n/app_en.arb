@@ -41,7 +41,7 @@
   "englishLanguage": "English",
   "polishLanguage": "Polish",
   "logoutButton": "Logout",
-  "aboutContent": "Tires are one of the most crucial components of a vehicle. The only subsystem of a car that is in constant contact with the road is the tire subsystem. Therefore, it is essential to monitor the condition of the tires regularly. Tires have a significant impact on vehicle safety, including handling, braking, and overall performance. This application aims to assist in monitoring and detecting tire damage using advanced artificial intelligence models.\n\nThis application was developed as part of a master's thesis titled 'Automatic Classification of Car Tire Condition Using Deep Learning Techniques' by Mateusz Szymański under the supervision of Dr. Janusz Rafałko.",
+  "aboutContent": "Tires are one of the most crucial components of a vehicle. The only subsystem of a car that is in constant contact with the road is the tire subsystem. Therefore, it is essential to monitor the condition of the tires regularly. Tires have a significant impact on vehicle safety, including handling, braking, and overall performance. This application aims to assist in monitoring and detecting tire damage using advanced artificial intelligence models.\n\nThis application was developed as part of a master's thesis titled 'Automatic Classification of Car Tire Condition Using Deep Learning Techniques' by Mateusz Szymański under the supervision of Dr. Janusz Rafałko.\n\nThis project uses an icon by surang from Freepik, available at: https://www.freepik.com/icon/inspection_4846000.",
   "saveButtonLabel": "Save",
   "appVersionLabel": "App Version",
   "settingsSavedMessage": "Settings saved successfully.",
