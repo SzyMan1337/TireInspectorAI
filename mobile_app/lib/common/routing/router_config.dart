@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/presentation/presentation.dart';
 
@@ -8,14 +9,28 @@ import 'route_names.dart';
 
 final routerConfig = Provider<GoRouter>(
   (ref) => GoRouter(
-    redirect: (context, state) {
-      final userState = ref.watch(routerAuthStateProvider);
+    redirect: (context, state) async {
+      // Check if the app has been unlocked
+      final prefs = await SharedPreferences.getInstance();
+      final isAppUnlocked = prefs.getBool('isAppUnlocked') ?? false;
 
+      // Avoid redirect loop by checking if already on the access code page
+      final isOnAccessCodePage =
+          state.fullPath?.startsWith('/access-code') ?? false;
+
+      // If the app is not unlocked and the user is not already on the access code page, redirect to the access code page
+      if (!isAppUnlocked && !isOnAccessCodePage) {
+        return '/access-code';
+      }
+
+      // After checking the app unlock, check if the user is authenticated
+      final userState = ref.watch(routerAuthStateProvider);
       final isAuthenticated = userState.value != null && userState.value!;
 
       final isAuthPath = state.fullPath?.startsWith('/auth') ?? false;
 
-      if (!isAuthenticated && !isAuthPath) {
+      // If the user is not authenticated and not on the auth page, redirect to the auth page
+      if (!isAuthenticated && !isAuthPath && isAppUnlocked) {
         return '/auth';
       }
 
@@ -117,6 +132,11 @@ final routerConfig = Provider<GoRouter>(
           final imageUrl = state.uri.queryParameters['imageUrl']!;
           return FullScreenImagePage(imageUrl: imageUrl);
         },
+      ),
+      GoRoute(
+        path: '/access-code',
+        name: RouterNames.accessCodePage.name,
+        builder: (context, state) => const AccessCodePage(),
       ),
     ],
   ),
