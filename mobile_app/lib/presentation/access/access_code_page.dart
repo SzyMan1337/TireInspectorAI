@@ -31,17 +31,18 @@ class _AccessCodePageState extends ConsumerState<AccessCodePage> {
           title: l10n.enterAccessCode,
           centerTitle: true,
           withPadding: true,
-          isScrollable: isSmallScreen,
+          isScrollable: true,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: isSmallScreen ? 32 : 128),
               Image.asset(
                 'assets/images/icons/app-icon.png',
                 height: 150,
                 width: 150,
               ),
-              const SizedBox(height: 64),
+              SizedBox(height: isSmallScreen ? 32 : 64),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
@@ -50,27 +51,31 @@ class _AccessCodePageState extends ConsumerState<AccessCodePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_passwordController.text == correctPassword) {
-                    final prefs = await SharedPreferences.getInstance();
-                    await prefs.setBool('isAppUnlocked', true);
+              // Full-width button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_passwordController.text == correctPassword) {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setBool('isAppUnlocked', true);
 
-                    if (context.mounted) {
-                      AppRouter.go(
-                        context,
-                        RouterNames.loginPage,
-                      );
+                      if (context.mounted) {
+                        AppRouter.goAndReplace(
+                          context,
+                          RouterNames.authPage,
+                        );
+                      }
+                    } else {
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(l10n.incorrectCode)),
+                        );
+                      }
                     }
-                  } else {
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(l10n.incorrectCode)),
-                      );
-                    }
-                  }
-                },
-                child: Text(l10n.unlock),
+                  },
+                  child: Text(l10n.unlock),
+                ),
               ),
               const SizedBox(height: 40),
               Text(

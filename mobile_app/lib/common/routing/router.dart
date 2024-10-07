@@ -18,6 +18,19 @@ class AppRouter {
     );
   }
 
+  static void goAndReplace(
+    context,
+    RouterNames routerName, {
+    Map<String, String> pathParameters = const {},
+    Map<String, String>? queryParameters,
+  }) {
+    GoRouter.of(context).goNamed(
+      routerName.name,
+      pathParameters: pathParameters,
+      queryParameters: queryParameters ?? {},
+    );
+  }
+
   static pop(context) => GoRouter.of(context).pop();
 
   static String getCurrentLocation(BuildContext context) {
