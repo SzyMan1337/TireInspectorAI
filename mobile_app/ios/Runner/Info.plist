@@ -64,5 +64,17 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
+		
+		<!-- Dodane zgody -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
+
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+		</array>
 	</dict>
 </plist>
