@@ -2,6 +2,7 @@ import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/utils/logger_provider.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class ModelService {
   final Logger logger;
@@ -35,8 +36,10 @@ class ModelService {
       logger
           .i("Model fetched and cached successfully. Path: ${model.file.path}");
       return model;
-    } catch (e) {
+    } catch (e, stack) {
       logger.e("Error fetching the model: $e");
+      FirebaseCrashlytics.instance
+          .recordError(e, stack, reason: 'Error fetching model');
       rethrow;
     }
   }

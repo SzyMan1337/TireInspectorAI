@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +7,7 @@ import 'package:tireinspectorai_app/data/interfaces/model_evaluator.dart';
 import 'package:tireinspectorai_app/data/utils/image_processing_helper.dart';
 import 'package:tireinspectorai_app/domain/domain.dart';
 import 'package:tireinspectorai_app/common/utils/model_service.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class LocalModelEvaluator implements ModelEvaluator {
   final ModelService modelService;
@@ -17,10 +17,16 @@ class LocalModelEvaluator implements ModelEvaluator {
 
   Future<void> _initializeInterpreter() async {
     if (_interpreter == null) {
-      FirebaseCustomModel model = await modelService.getModel();
-      final modelPath = model.file.path;
-      _interpreter = Interpreter.fromFile(File(modelPath));
-      _interpreter!.allocateTensors();
+      try {
+        FirebaseCustomModel model = await modelService.getModel();
+        final modelPath = model.file.path;
+        _interpreter = Interpreter.fromFile(File(modelPath));
+        _interpreter!.allocateTensors();
+      } catch (e, stack) {
+        FirebaseCrashlytics.instance
+            .recordError(e, stack, reason: 'Error initializing interpreter');
+        rethrow;
+      }
     }
   }
 
@@ -58,8 +64,9 @@ class LocalModelEvaluator implements ModelEvaluator {
         modelUsed: InspectionModel.localModel,
         evaluationDate: DateTime.now(),
       );
-    } catch (e) {
-      // Handle any errors during inference or processing
+    } catch (e, stack) {
+      FirebaseCrashlytics.instance
+          .recordError(e, stack, reason: 'Error during model evaluation');
       rethrow;
     }
   }
