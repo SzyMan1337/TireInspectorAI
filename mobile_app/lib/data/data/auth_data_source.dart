@@ -40,7 +40,9 @@ class _AuthRemoteDataSource implements AuthRepository {
   @override
   Future<CurrentUserDataModel> loginWithApple() async {
     try {
-      final provider = AppleAuthProvider()..addScope('email');
+      final provider = AppleAuthProvider()
+        ..addScope('email')
+        ..addScope('name');
       final userCredential = await firebaseAuth.signInWithProvider(
         provider,
       );
@@ -120,7 +122,10 @@ class _AuthRemoteDataSource implements AuthRepository {
         credential,
       );
 
-      return  CurrentUserDataModel(uid: userCredential.user!.uid, email: googleUser!.email, displayName: googleUser.displayName);
+      return CurrentUserDataModel(
+          uid: userCredential.user!.uid,
+          email: googleUser!.email,
+          displayName: googleUser.displayName);
     } on FirebaseAuthException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
     } catch (e) {
