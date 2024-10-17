@@ -120,9 +120,7 @@ class _AuthRemoteDataSource implements AuthRepository {
         credential,
       );
 
-      // print('User: ${userCredential.user}');
-
-      return CurrentUserDataModel.fromFirebaseUser(userCredential.user!);
+      return  CurrentUserDataModel(uid: userCredential.user!.uid, email: googleUser!.email, displayName: googleUser.displayName);
     } on FirebaseAuthException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
     } catch (e) {

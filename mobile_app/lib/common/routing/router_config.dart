@@ -10,6 +10,10 @@ import 'route_names.dart';
 final routerConfig = Provider<GoRouter>(
   (ref) => GoRouter(
     redirect: (context, state) async {
+      // After checking the app unlock, check if the user is authenticated
+      final userState = ref.watch(routerAuthStateProvider);
+      final isAuthenticated = userState.value != null && userState.value!;
+
       // Check if the app has been unlocked
       final prefs = await SharedPreferences.getInstance();
       final isAppUnlocked = prefs.getBool('isAppUnlocked') ?? false;
@@ -22,10 +26,6 @@ final routerConfig = Provider<GoRouter>(
       if (!isAppUnlocked && !isOnAccessCodePage) {
         return '/access-code';
       }
-
-      // After checking the app unlock, check if the user is authenticated
-      final userState = ref.watch(routerAuthStateProvider);
-      final isAuthenticated = userState.value != null && userState.value!;
 
       final isAuthPath = state.fullPath?.startsWith('/auth') ?? false;
 
