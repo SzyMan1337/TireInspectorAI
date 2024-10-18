@@ -1158,47 +1158,40 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.36)
   - BoringSSL-GRPC/Interface (0.0.36)
   - cloud_firestore (5.4.2):
-    - Firebase/Firestore (= 11.2.0)
+    - Firebase/Firestore (= 11.0.0)
     - firebase_core
     - Flutter
-  - Firebase/Auth (11.2.0):
+  - Firebase/Auth (11.0.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 11.2.0)
-  - Firebase/CoreOnly (11.2.0):
-    - FirebaseCore (= 11.2.0)
-  - Firebase/Crashlytics (11.2.0):
+    - FirebaseAuth (~> 11.0.0)
+  - Firebase/CoreOnly (11.0.0):
+    - FirebaseCore (= 11.0.0)
+  - Firebase/Firestore (11.0.0):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 11.2.0)
-  - Firebase/Firestore (11.2.0):
+    - FirebaseFirestore (~> 11.0.0)
+  - Firebase/MLModelDownloader (11.0.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 11.2.0)
-  - Firebase/MLModelDownloader (11.2.0):
+    - FirebaseMLModelDownloader (~> 11.0.0-beta)
+  - Firebase/Storage (11.0.0):
     - Firebase/CoreOnly
-    - FirebaseMLModelDownloader (~> 11.2.0-beta)
-  - Firebase/Storage (11.2.0):
-    - Firebase/CoreOnly
-    - FirebaseStorage (~> 11.2.0)
+    - FirebaseStorage (~> 11.0.0)
   - firebase_auth (5.3.0):
-    - Firebase/Auth (= 11.2.0)
+    - Firebase/Auth (= 11.0.0)
     - firebase_core
     - Flutter
-  - firebase_core (3.6.0):
-    - Firebase/CoreOnly (= 11.2.0)
-    - Flutter
-  - firebase_crashlytics (4.1.3):
-    - Firebase/Crashlytics (= 11.2.0)
-    - firebase_core
+  - firebase_core (3.5.0):
+    - Firebase/CoreOnly (= 11.0.0)
     - Flutter
   - firebase_ml_model_downloader (0.3.1-2):
-    - Firebase/MLModelDownloader (= 11.2.0)
+    - Firebase/MLModelDownloader (= 11.0.0)
     - firebase_core
     - Flutter
   - firebase_storage (12.3.1):
-    - Firebase/Storage (= 11.2.0)
+    - Firebase/Storage (= 11.0.0)
     - firebase_core
     - Flutter
   - FirebaseAppCheckInterop (11.3.0)
-  - FirebaseAuth (11.2.0):
+  - FirebaseAuth (11.0.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
     - FirebaseCore (~> 11.0)
@@ -1208,7 +1201,7 @@ PODS:
     - GTMSessionFetcher/Core (~> 3.4)
     - RecaptchaInterop (~> 100.0)
   - FirebaseAuthInterop (11.3.0)
-  - FirebaseCore (11.2.0):
+  - FirebaseCore (11.0.0):
     - FirebaseCoreInternal (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
@@ -1216,21 +1209,12 @@ PODS:
     - FirebaseCore (~> 11.0)
   - FirebaseCoreInternal (11.3.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
-  - FirebaseCrashlytics (11.2.0):
-    - FirebaseCore (~> 11.0)
-    - FirebaseInstallations (~> 11.0)
-    - FirebaseRemoteConfigInterop (~> 11.0)
-    - FirebaseSessions (~> 11.0)
-    - GoogleDataTransport (~> 10.0)
-    - GoogleUtilities/Environment (~> 8.0)
-    - nanopb (~> 3.30910.0)
-    - PromisesObjC (~> 2.4)
-  - FirebaseFirestore (11.2.0):
+  - FirebaseFirestore (11.0.0):
     - FirebaseCore (~> 11.0)
     - FirebaseCoreExtension (~> 11.0)
-    - FirebaseFirestoreInternal (= 11.2.0)
+    - FirebaseFirestoreInternal (= 11.0.0)
     - FirebaseSharedSwift (~> 11.0)
-  - FirebaseFirestoreInternal (11.2.0):
+  - FirebaseFirestoreInternal (11.0.0):
     - abseil/algorithm (~> 1.20240116.1)
     - abseil/base (~> 1.20240116.1)
     - abseil/container/flat_hash_map (~> 1.20240116.1)
@@ -1250,25 +1234,15 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
-  - FirebaseMLModelDownloader (11.2.0-beta):
+  - FirebaseMLModelDownloader (11.0.0-beta):
     - FirebaseCore (~> 11.0)
     - FirebaseCoreExtension (~> 11.0)
     - FirebaseInstallations (~> 11.0)
     - GoogleDataTransport (~> 10.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - SwiftProtobuf (~> 1.19)
-  - FirebaseRemoteConfigInterop (11.3.0)
-  - FirebaseSessions (11.3.0):
-    - FirebaseCore (~> 11.0)
-    - FirebaseCoreExtension (~> 11.0)
-    - FirebaseInstallations (~> 11.0)
-    - GoogleDataTransport (~> 10.0)
-    - GoogleUtilities/Environment (~> 8.0)
-    - GoogleUtilities/UserDefaults (~> 8.0)
-    - nanopb (~> 3.30910.0)
-    - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (11.3.0)
-  - FirebaseStorage (11.2.0):
+  - FirebaseStorage (11.0.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
     - FirebaseCore (~> 11.0)
@@ -1427,8 +1401,6 @@ PODS:
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.4.0)
-  - PromisesSwift (2.4.0):
-    - PromisesObjC (= 2.4.0)
   - RecaptchaInterop (100.0.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
@@ -1464,7 +1436,6 @@ DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - firebase_ml_model_downloader (from `.symlinks/plugins/firebase_ml_model_downloader/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
@@ -1489,13 +1460,10 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreExtension
     - FirebaseCoreInternal
-    - FirebaseCrashlytics
     - FirebaseFirestore
     - FirebaseFirestoreInternal
     - FirebaseInstallations
     - FirebaseMLModelDownloader
-    - FirebaseRemoteConfigInterop
-    - FirebaseSessions
     - FirebaseSharedSwift
     - FirebaseStorage
     - GoogleDataTransport
@@ -1508,7 +1476,6 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
-    - PromisesSwift
     - RecaptchaInterop
     - SwiftProtobuf
     - TensorFlowLiteC
@@ -1521,8 +1488,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
-  firebase_crashlytics:
-    :path: ".symlinks/plugins/firebase_crashlytics/ios"
   firebase_ml_model_downloader:
     :path: ".symlinks/plugins/firebase_ml_model_downloader/ios"
   firebase_storage:
@@ -1550,28 +1515,24 @@ SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   BoringSSL-GRPC: ca6a8e5d04812fce8ffd6437810c2d46f925eaeb
-  cloud_firestore: ffbf407692570e7cc01eb17758b9c36860e73178
-  Firebase: 98e6bf5278170668a7983e12971a66b2cd57fc8c
-  firebase_auth: fa0a64faed1efd32905446de54e398fe3b180dc8
-  firebase_core: 2bedc3136ec7c7b8561c6123ed0239387b53f2af
-  firebase_crashlytics: 37d104d457b51760b48504a93a12b3bf70995d77
-  firebase_ml_model_downloader: 6e3791ab31326e0ae14f6c9f6bd578d827232489
-  firebase_storage: 47e12b79a66bfdfeec97977d38019b349fbf6b47
+  cloud_firestore: efded0403c9e674954e2788d93bc2772a5089557
+  Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
+  firebase_auth: f27287630c4d9e2c3c63e64d9240822ad6b07e5b
+  firebase_core: 2ec6b789859c7c24766344ec71fdf78639402d56
+  firebase_ml_model_downloader: b71cf25fc96523a9b3fd71267e2395d10df9e70c
+  firebase_storage: 9e484b4e90a239066e535a2ee2b6d662b140372b
   FirebaseAppCheckInterop: 7789a8adfb09e905ce02a76540b94b059029ea81
-  FirebaseAuth: 2a198b8cdbbbd457f08d74df7040feb0a0e7777a
+  FirebaseAuth: d5cf28be74d7e82257f6a3f717509eff70d3cf4a
   FirebaseAuthInterop: c453b7ba7c49b88b2f519bb8d2e29edf7ada4a2a
-  FirebaseCore: a282032ae9295c795714ded2ec9c522fc237f8da
+  FirebaseCore: 3cf438f431f18c12cdf2aaf64434648b63f7e383
   FirebaseCoreExtension: 30bb063476ef66cd46925243d64ad8b2c8ac3264
   FirebaseCoreInternal: ac26d09a70c730e497936430af4e60fb0c68ec4e
-  FirebaseCrashlytics: cfc69af5b53565dc6a5e563788809b5778ac4eac
-  FirebaseFirestore: 62708adbc1dfcd6d165a7c0a202067b441912dc9
-  FirebaseFirestoreInternal: ad9b9ee2d3d430c8f31333a69b3b6737a7206232
+  FirebaseFirestore: a1758850668dbb503537b7780a2a1fdc5e37c6ce
+  FirebaseFirestoreInternal: 9fcc0ccb987ab73163f2249444e4bfd9eac63748
   FirebaseInstallations: 58cf94dabf1e2bb2fa87725a9be5c2249171cda0
-  FirebaseMLModelDownloader: 4cc8882edcf59035328f8354889e2f0a9060441c
-  FirebaseRemoteConfigInterop: c3a5c31b3c22079f41ba1dc645df889d9ce38cb9
-  FirebaseSessions: 655ff17f3cc1a635cbdc2d69b953878001f9e25b
+  FirebaseMLModelDownloader: 235a36342a2e7aecd7d6774b856b83c949e8cf58
   FirebaseSharedSwift: d39c2ad64a11a8d936ce25a42b00df47078bb59c
-  FirebaseStorage: 9353f926690b2329957860abfcbc8b4074fe45e8
+  FirebaseStorage: f9e2bf027d549db18b6195a37b31c85f56e40200
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
@@ -1588,7 +1549,6 @@ SPEC CHECKSUMS:
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
-  PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
