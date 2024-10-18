@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -304,10 +303,7 @@ class _HomeContentState extends ConsumerState<HomeContent> {
                     );
                   }
                 },
-              ).catchError((error, stack) {
-                FirebaseCrashlytics.instance.recordError(error, stack,
-                    reason: 'Error during inspection result processing');
-
+              ).catchError((error) {
                 if (context.mounted) {
                   setState(() {
                     widget.onLoadingChange(false);
@@ -317,10 +313,7 @@ class _HomeContentState extends ConsumerState<HomeContent> {
                   );
                 }
               });
-            } catch (e, stack) {
-              FirebaseCrashlytics.instance
-                  .recordError(e, stack, reason: 'Error triggering inspection');
-
+            } catch (e) {
               if (context.mounted) {
                 setState(() {
                   widget.onLoadingChange(false);
