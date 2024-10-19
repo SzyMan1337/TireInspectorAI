@@ -48,8 +48,8 @@ class _AuthRemoteDataSource implements AuthRepository {
       );
       return CurrentUserDataModel(
         uid: userCredential.user!.uid,
-        email: userCredential.user!.email,
-        displayName: userCredential.user!.displayName,
+        email: userCredential.user!.email ?? 'Unknown Email',
+        displayName: userCredential.user!.displayName ?? 'Anonymous',
       );
     } on FirebaseAuthException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
@@ -123,9 +123,10 @@ class _AuthRemoteDataSource implements AuthRepository {
       );
 
       return CurrentUserDataModel(
-          uid: userCredential.user!.uid,
-          email: googleUser!.email,
-          displayName: googleUser.displayName);
+        uid: userCredential.user!.uid,
+        email: googleUser?.email ?? 'Unknown Email',
+        displayName: googleUser?.displayName ?? 'Anonymous',
+      );
     } on FirebaseAuthException catch (e) {
       throw AppFirebaseException(e.code, e.message ?? 'An error occurred');
     } catch (e) {

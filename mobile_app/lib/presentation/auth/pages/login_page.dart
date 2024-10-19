@@ -18,7 +18,7 @@ class LoginPage extends ConsumerWidget {
     final loginState = ref.watch(loginStateProvider);
     final l10n = ref.watch(localizationProvider);
 
-    // in case of error show a snackbar
+    // Listen to login state changes and handle errors or success
     ref.listen(
       loginStateProvider,
       (prev, next) {
@@ -34,8 +34,12 @@ class LoginPage extends ConsumerWidget {
               ),
             ),
           );
-        } else {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        } else if (!next.isLoading && next.hasValue) {
+          // Navigate to main page if login is successful
+          AppRouter.goAndReplace(
+            context,
+            RouterNames.mainPage,
+          );
         }
       },
     );
