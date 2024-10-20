@@ -114,9 +114,9 @@
             background-color: #673ab7;
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 0px;
             width: 100%;
-            font-size: 1rem;
+            font-size: 0.9rem;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -137,16 +137,39 @@
 
     <main>
         <div class="content-wrapper">
+            <!-- About Section -->
             <section class="about box">
                 <h2>About the App</h2>
-                <p>TireInspectorAI lets you inspect your car's tires with ease. Simply upload a photo, and our deep
-                    learning models will detect any issues, helping you stay safe on the road.</p>
+                <p>Tires are one of the most crucial components of a vehicle. The only subsystem of a car that is in
+                    constant contact with the road is the tire subsystem. Therefore, it is essential to monitor the
+                    condition of the tires regularly. Tires have a significant impact on vehicle safety, including
+                    handling, braking, and overall performance.</p>
+                <p>This application aims to assist in monitoring and detecting tire damage using advanced artificial
+                    intelligence models.</p>
+                <p>This application was developed as part of a master's thesis titled 'Automatic Classification of Car
+                    Tire Condition Using Deep Learning Techniques' by Mateusz Szymański under the supervision of Dr.
+                    Janusz Rafałko.</p>
+                <p>This project uses an icon by surang from Freepik, available at: <a
+                        href="https://www.freepik.com/icon/inspection_4846000" target="_blank">Freepik icon</a>.</p>
             </section>
+
+            <!-- APK Download Section -->
+            <section class="download box">
+                <h2>Download</h2>
+                <p>You can download the Android version of the app from the link below:</p>
+                <p><a href="{{ firebase_apk_link }}" download="TireInspectorAI.apk">Download Android APK</a></p>
+                <p>For iOS users, visit the <a href="https://apps.apple.com/app/tireinspectorai">App Store</a> to
+                    download the app.</p>
+            </section>
+
+            <!-- Contact Section -->
             <section class="contact box">
                 <h2>Contact Us</h2>
                 <p>If you need any help, feel free to reach out via email:</p>
                 <p><a href="mailto:tireinspectorai.support@gmail.com">tireinspectorai.support@gmail.com</a></p>
             </section>
+
+            <!-- Privacy Policy Section -->
             <section class="privacy box">
                 <h2>Privacy Policy</h2>
                 <p>For more information about how we handle your data, please visit our <a
