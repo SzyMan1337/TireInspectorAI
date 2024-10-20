@@ -1,94 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ session['lang'] }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - TireInspectorAI</title>
+    <title>{{ texts['privacy_policy_heading'] }} - TireInspectorAI</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='app-icon.png') }}">
+
     <style>
+        /* Global settings */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
+            padding: 0;
+            background-color: #f3f3f3;
             color: #333;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{{ url_for("static", filename="background-image.png") }}') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
         }
 
         header {
-            text-align: center;
-            padding: 20px;
             background-color: #673ab7;
             color: white;
+            padding: 10px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-content div {
+            display: flex;
+            align-items: center;
         }
 
         h1 {
-            font-size: 2rem;
-            margin: 0;
+            font-weight: 500;
+            font-size: 1.8rem;
+            margin: 0 10px;
         }
 
-        section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
+        .app-icon-small {
+            width: 40px;
+            height: 40px;
+        }
+
+        .language-switch {
+            margin-right: 70px;
+        }
+
+        .language-switch select {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border-radius: 20px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            background-color: #673ab7;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+
+        .language-switch select:hover {
+            background-color: #5a32a3;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 120px 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
             color: #673ab7;
+            font-size: 2rem;
+            margin-bottom: 15px;
         }
 
         p {
-            line-height: 1.6;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
         }
     </style>
 </head>
 
 <body>
+    <div class="background-overlay"></div>
+
     <header>
-        <h1>Privacy Policy</h1>
+        <div class="header-content">
+            <div style="display: flex; align-items: center;">
+                <a href="{{ url_for('support_bp.support') }}"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='app-icon.png') }}" alt="App Icon" class="app-icon-small">
+                    <h1 style="margin-left: 10px;">TireInspectorAI Support</h1>
+                </a>
+            </div>
+            <div class="language-switch">
+                <form action="{{ url_for('support_bp.switch_language', lang='') }}" method="GET" id="languageForm">
+                    <select id="languageSelect" onchange="switchLanguage()">
+                        <option value="en" {% if session['lang']=='en' %}selected{% endif %}>English</option>
+                        <option value="pl" {% if session['lang']=='pl' %}selected{% endif %}>Polski</option>
+                    </select>
+                </form>
+            </div>
+        </div>
     </header>
-    <section>
-        <h2>Introduction</h2>
-        <p>At TireInspectorAI, we respect your privacy and are committed to protecting your personal data. This privacy
-            policy explains how we collect, use, and safeguard your information when you use our application.</p>
 
-        <h2>Data Collection</h2>
-        <p>We collect the following types of data:</p>
-        <ul>
-            <li>Personal identification information (such as name, email address) for account creation and
-                authentication.</li>
-            <li>Photos of tires uploaded by users for inspection purposes.</li>
-        </ul>
+    <main>
+        <div class="content-wrapper">
+            <!-- Privacy Policy Intro Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_intro'] }}</h2>
+                <p>{{ texts['privacy_policy_intro_text'] }}</p>
+            </section>
 
-        <h2>How We Use Your Data</h2>
-        <p>Your data is used for the following purposes:</p>
-        <ul>
-            <li>Authenticating users via Google, Apple, and email logins.</li>
-            <li>Analyzing tire images using machine learning models to detect defects.</li>
-            <li>Storing results for future reference in your account.</li>
-        </ul>
+            <!-- Data Collection Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_data_collection'] }}</h2>
+                <p>{{ texts['privacy_policy_data_collection_text'] }}</p>
+                <ul>
+                    <li>{{ texts['privacy_policy_data_item1'] }}</li>
+                    <li>{{ texts['privacy_policy_data_item2'] }}</li>
+                </ul>
+            </section>
 
-        <h2>Data Protection</h2>
-        <p>We use industry-standard encryption and security measures to protect your data. Access to personal data is
-            restricted to authorized personnel only.</p>
+            <!-- Data Use Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_data_use'] }}</h2>
+                <p>{{ texts['privacy_policy_data_use_text'] }}</p>
+                <ul>
+                    <li>{{ texts['privacy_policy_data_use_item1'] }}</li>
+                    <li>{{ texts['privacy_policy_data_use_item2'] }}</li>
+                    <li>{{ texts['privacy_policy_data_use_item3'] }}</li>
+                </ul>
+            </section>
 
-        <h2>Data Deletion</h2>
-        <p>You can request the deletion of your account and all associated data by contacting us at: <a
-                href="mailto:tireinspectorai.support@gmail.com">tireinspectorai.support@gmail.com</a>.</p>
+            <!-- Data Protection Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_data_protection'] }}</h2>
+                <p>{{ texts['privacy_policy_data_protection_text'] }}</p>
+            </section>
 
-        <h2>Changes to This Policy</h2>
-        <p>We may update this privacy policy from time to time. You will be notified of any significant changes via
-            email or through our app.</p>
+            <!-- Data Deletion Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_data_deletion'] }}</h2>
+                <p>{{ texts['privacy_policy_data_deletion_text'] }}</p>
+            </section>
 
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this privacy policy, please contact us at <a
-                href="mailto:tireinspectorai.support@gmail.com">tireinspectorai.support@gmail.com</a>.</p>
-    </section>
+            <!-- Policy Changes Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_changes'] }}</h2>
+                <p>{{ texts['privacy_policy_changes_text'] }}</p>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="box">
+                <h2>{{ texts['privacy_policy_contact'] }}</h2>
+                <p>{{ texts['privacy_policy_contact_text'] }} <a
+                        href="mailto:tireinspectorai.support@gmail.com">tireinspectorai.support@gmail.com</a>.</p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function switchLanguage() {
+            const selectedLanguage = document.getElementById('languageSelect').value;
+            window.location.href = `/switch_language/${selectedLanguage}`;
+        }
+    </script>
 </body>
 
 </html>

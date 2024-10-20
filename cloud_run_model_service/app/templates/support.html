@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ session['lang'] }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TireInspectorAI Support</title>
+    <title>TireInspectorAI</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='app-icon.png') }}">
 
@@ -39,7 +39,7 @@
         header {
             background-color: #673ab7;
             color: white;
-            padding: 20px;
+            padding: 10px 20px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -52,18 +52,43 @@
         .header-content {
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
+        }
+
+        .header-content div {
+            display: flex;
+            align-items: center;
         }
 
         h1 {
             font-weight: 500;
-            font-size: 2.2rem;
-            margin: 0;
+            font-size: 1.8rem;
+            margin: 0 10px;
         }
 
         .app-icon-small {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .language-switch {
+            margin-right: 70px;
+        }
+
+        .language-switch select {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border-radius: 20px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            background-color: #673ab7;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+
+        .language-switch select:hover {
+            background-color: #5a32a3;
         }
 
         main {
@@ -114,13 +139,18 @@
             background-color: #673ab7;
             color: white;
             text-align: center;
-            padding: 0px;
+            padding: 5px;
             width: 100%;
             font-size: 0.9rem;
             position: fixed;
             bottom: 0;
             left: 0;
             z-index: 1;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
         }
     </style>
 </head>
@@ -130,8 +160,21 @@
 
     <header>
         <div class="header-content">
-            <img src="{{ url_for('static', filename='app-icon.png') }}" alt="App Icon" class="app-icon-small">
-            <h1>TireInspectorAI Support</h1>
+            <div style="display: flex; align-items: center;">
+                <a href="{{ url_for('support_bp.support') }}"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='app-icon.png') }}" alt="App Icon" class="app-icon-small">
+                    <h1 style="margin-left: 10px;">TireInspectorAI Support</h1>
+                </a>
+            </div>
+            <div class="language-switch">
+                <form action="{{ url_for('support_bp.switch_language', lang='') }}" method="GET" id="languageForm">
+                    <select id="languageSelect" onchange="switchLanguage()">
+                        <option value="en" {% if session['lang']=='en' %}selected{% endif %}>English</option>
+                        <option value="pl" {% if session['lang']=='pl' %}selected{% endif %}>Polski</option>
+                    </select>
+                </form>
+            </div>
         </div>
     </header>
 
@@ -139,39 +182,37 @@
         <div class="content-wrapper">
             <!-- About Section -->
             <section class="about box">
-                <h2>About the App</h2>
-                <p>Tires are one of the most crucial components of a vehicle. The only subsystem of a car that is in
-                    constant contact with the road is the tire subsystem. Therefore, it is essential to monitor the
-                    condition of the tires regularly. Tires have a significant impact on vehicle safety, including
-                    handling, braking, and overall performance.</p>
-                <p>This application aims to assist in monitoring and detecting tire damage using advanced artificial
-                    intelligence models.</p>
-                <p>This application was developed as part of a master's thesis titled 'Automatic Classification of Car
-                    Tire Condition Using Deep Learning Techniques' by Mateusz Szymański under the supervision of Dr.
-                    Janusz Rafałko.</p>
-                <p>This project uses an icon by surang from Freepik, available at: <a
-                        href="https://www.freepik.com/icon/inspection_4846000" target="_blank">Freepik icon</a>.</p>
+                <h2>{{ texts['about_heading'] }}</h2>
+                <p>{{ texts['about_text'] }}</p>
+                <p>{{ texts['about_thesis'] }}</p>
+                <p>{{ texts['about_icon'] }} <a href="https://www.freepik.com/icon/inspection_4846000"
+                        target="_blank">Freepik</a>.</p>
             </section>
+
 
             <!-- APK Download Section -->
             <section class="download box">
-                <h2>Download</h2>
-                <p>You can download the Android version of the app from the link below:</p>
-                <p><a href="{{ firebase_apk_link }}" download="TireInspectorAI.apk">Download Android APK</a></p>
-                <p>For iOS users, visit the <a href="https://apps.apple.com/app/tireinspectorai">App Store</a> to
-                    download the app.</p>
+                <h2>{{ texts['download_heading'] }}</h2>
+                <ul>
+                    <p>{{ texts['download_android'] }}
+                        <a href="{{ firebase_apk_link }}" download="TireInspectorAI.apk">Download Android APK</a>
+                    </p>
+                    <p>{{ texts['download_ios'] }}
+                        <a href="https://apps.apple.com/app/tireinspectorai" target="_blank">App Store</a>
+                    </p>
+                </ul>
             </section>
 
             <!-- Contact Section -->
             <section class="contact box">
-                <h2>Contact Us</h2>
-                <p>If you need any help, feel free to reach out via email:</p>
+                <h2>{{ texts['contact_heading'] }}</h2>
+                <p>{{ texts['contact_text'] }}</p>
                 <p><a href="mailto:tireinspectorai.support@gmail.com">tireinspectorai.support@gmail.com</a></p>
             </section>
 
             <!-- Privacy Policy Section -->
             <section class="privacy box">
-                <h2>Privacy Policy</h2>
+                <h2>{{ texts['privacy_policy_heading'] }}</h2>
                 <p>For more information about how we handle your data, please visit our <a
                         href="{{ url_for('support_bp.privacy_policy') }}">Privacy Policy</a>.</p>
             </section>
@@ -181,6 +222,13 @@
     <footer>
         <p>&copy; 2024 TireInspectorAI. All rights reserved.</p>
     </footer>
+
+    <script>
+        function switchLanguage() {
+            const selectedLanguage = document.getElementById('languageSelect').value;
+            window.location.href = `/switch_language/${selectedLanguage}`;
+        }
+    </script>
 </body>
 
 </html>
