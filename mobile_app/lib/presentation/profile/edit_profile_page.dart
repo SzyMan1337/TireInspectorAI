@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tireinspectorai_app/common/common.dart';
+import 'package:tireinspectorai_app/domain/usecases/user_usecase.dart';
 import 'package:tireinspectorai_app/l10n/localization_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tireinspectorai_app/presentation/main/states/user_state.dart';
@@ -85,7 +86,13 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: _buildSaveButton(context, l10n),
+            child: Column(
+              children: [
+                _buildSaveButton(context, l10n),
+                GapWidgets.h16,
+                _buildDeleteAccountLink(context, l10n),
+              ],
+            ),
           ),
           GapWidgets.h24,
         ],
@@ -162,6 +169,21 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
     );
   }
 
+  Widget _buildDeleteAccountLink(BuildContext context, AppLocalizations l10n) {
+    return GestureDetector(
+      onTap: () => _confirmAccountDeletion(context, l10n),
+      child: Center(
+        child: Text(
+          l10n.deleteAccountLabel,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.error,
+            decoration: TextDecoration.underline,
+          ),
+        ),
+      ),
+    );
+  }
+
   Future<void> _pickImage(WidgetRef ref, ImageSource source) async {
     final imagePicker = ImagePicker();
     final pickedFile = await imagePicker.pickImage(source: source);
@@ -198,6 +220,56 @@ class EditProfilePageState extends ConsumerState<EditProfilePage> {
         SnackBar(content: Text(l10n.imageDeletedMessage)),
       );
     }
+  }
+
+  void _confirmAccountDeletion(BuildContext context, AppLocalizations l10n) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String confirmationInput = '';
+        return AlertDialog(
+          title: Text(l10n.confirmDeletionTitle),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(l10n
+                  .confirmDeletionMessage(l10n.deletionConfirmationKeyword)),
+              TextField(
+                onChanged: (value) => confirmationInput = value,
+                decoration: InputDecoration(
+                  labelText: l10n
+                      .enterDeleteTextLabel(l10n.deletionConfirmationKeyword),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.cancelButtonLabel),
+            ),
+            TextButton(
+              onPressed: () {
+                if (confirmationInput.toLowerCase() ==
+                    l10n.deletionConfirmationKeyword.toLowerCase()) {
+                  ref.read(deleteAccountUseCaseProvider(widget.userId));
+                  ref.read(userUseCaseProvider).signOut();
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.accountDeletedMessage)),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.incorrectDeletionInputMessage)),
+                  );
+                }
+              },
+              child: Text(l10n.confirmButtonLabel),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _showImageOptions(

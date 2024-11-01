@@ -117,5 +117,14 @@
   "accessCode": "Kod dostępu",
   "incorrectCode": "Niepoprawny kod",
   "unlock": "Odblokuj",
-  "accessCodeDescription": "Dostęp do tej aplikacji jest ograniczony tylko dla upoważnionych użytkowników. Musisz posiadać klucz dostępu, aby kontynuować."
+  "accessCodeDescription": "Dostęp do tej aplikacji jest ograniczony tylko dla upoważnionych użytkowników. Musisz posiadać klucz dostępu, aby kontynuować.",
+  "deleteAccountLabel": "Usuń konto",
+  "confirmDeletionTitle": "Potwierdzenie usunięcia konta",
+  "confirmDeletionMessage": "Ten proces jest nieodwracalny. Wszystkie twoje dane i zdjęcia zostaną trwale usunięte. Aby potwierdzić, wpisz '{deletionKeyword}'.",
+  "enterDeleteTextLabel": "Wpisz '{deletionKeyword}'",
+  "cancelButtonLabel": "Anuluj",
+  "confirmButtonLabel": "Potwierdź",
+  "accountDeletedMessage": "Konto zostało usunięte.",
+  "incorrectDeletionInputMessage": "Niepoprawny tekst potwierdzenia.",
+  "deletionConfirmationKeyword": "usun"
 }

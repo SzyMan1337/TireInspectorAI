@@ -10,6 +10,7 @@ abstract interface class AuthRepository {
     required String password,
   });
   Future<void> forgotPassword(String email);
+  Future<void> deleteAccount();
   Future<CurrentUserDataModel> loginWithGoogle();
   Future<CurrentUserDataModel> loginWithApple();
   Future<void> signOut();

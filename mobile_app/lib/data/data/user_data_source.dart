@@ -96,6 +96,21 @@ class _UserRemoteDataSource implements UserRepository {
   }
 
   @override
+  Future<void> deleteUserData(String uid) async {
+    try {
+      await databaseDataSource
+          .collection(CollectionsName.users.name)
+          .doc(uid)
+          .delete();
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(
+          e.code, e.message ?? 'An error occurred while deleting user data');
+    } catch (e) {
+      throw const UnknownException();
+    }
+  }
+
+  @override
   Future<bool> userExists(String uid) async {
     try {
       final doc = await databaseDataSource

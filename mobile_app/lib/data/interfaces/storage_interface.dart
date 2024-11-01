@@ -6,4 +6,5 @@ abstract interface class StorageRepository {
   Future<void> deleteFile(String storageFilePath);
   Future<void> deleteByUrl(String url);
   Future<String> getDownloadUrl(String storageFilePath);
+  Future<List<String>> getUserImagePaths(String uid);
 }

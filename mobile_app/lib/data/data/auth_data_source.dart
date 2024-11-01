@@ -144,6 +144,18 @@ class _AuthRemoteDataSource implements AuthRepository {
       throw const UnknownException();
     }
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await firebaseAuth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw AppFirebaseException(
+          e.code, e.message ?? 'An error occurred while deleting the account');
+    } catch (e) {
+      throw const UnknownException();
+    }
+  }
 }
 
 final authRemoteDataSourceProvider = Provider<_AuthRemoteDataSource>(

@@ -118,5 +118,14 @@
   "accessCode": "Access Code",
   "incorrectCode": "Incorrect code",
   "unlock": "Unlock",
-  "accessCodeDescription": "Access to this app is restricted to authorized users. You need an access key to proceed."
+  "accessCodeDescription": "Access to this app is restricted to authorized users. You need an access key to proceed.",
+  "deleteAccountLabel": "Delete Account",
+  "confirmDeletionTitle": "Confirm Account Deletion",
+  "confirmDeletionMessage": "This process is irreversible. All your data and photos will be permanently deleted. To confirm, please type '{deletionKeyword}'.",
+  "enterDeleteTextLabel": "Enter '{deletionKeyword}'",
+  "cancelButtonLabel": "Cancel",
+  "confirmButtonLabel": "Confirm",
+  "accountDeletedMessage": "Account has been deleted.",
+  "incorrectDeletionInputMessage": "Incorrect confirmation text.",
+  "deletionConfirmationKeyword": "delete"
 }

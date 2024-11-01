@@ -65,6 +65,38 @@ class StorageDataSource implements StorageRepository {
   }
 
   @override
+  Future<List<String>> getUserImagePaths(String uid) async {
+    try {
+      final avatarsResult =
+          await _storage.ref().child('avatars/$uid').listAll();
+      final avatarPaths =
+          avatarsResult.items.map((item) => item.fullPath).toList();
+
+      final inspectionsRef = _storage.ref().child('inspections/$uid');
+      final inspectionPaths = await _getAllPathsInFolder(inspectionsRef);
+
+      return [...avatarPaths, ...inspectionPaths];
+    } catch (error) {
+      throw Exception('Error fetching user image paths: $error');
+    }
+  }
+
+  Future<List<String>> _getAllPathsInFolder(Reference folderRef) async {
+    final List<String> allPaths = [];
+
+    final ListResult folderResult = await folderRef.listAll();
+    for (final item in folderResult.items) {
+      allPaths.add(item.fullPath);
+    }
+
+    for (final prefix in folderResult.prefixes) {
+      allPaths.addAll(await _getAllPathsInFolder(prefix));
+    }
+
+    return allPaths;
+  }
+
+  @override
   Future<String> getDownloadUrl(String storageFilePath) {
     final ref = _storage.ref().child(storageFilePath);
     return ref.getDownloadURL();

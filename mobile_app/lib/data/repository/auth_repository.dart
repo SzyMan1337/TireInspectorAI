@@ -62,6 +62,11 @@ class _AuthRepository implements AuthRepository {
   }
 
   @override
+  Future<void> deleteAccount() async {
+    await _authDataSource.deleteAccount();
+  }
+
+  @override
   Future<CurrentUserDataModel> loginWithApple() async {
     final user = await _authDataSource.loginWithApple();
 

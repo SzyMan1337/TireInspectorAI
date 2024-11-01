@@ -23,6 +23,11 @@ class _StorageRepository implements StorageRepository {
   }
 
   @override
+  Future<List<String>> getUserImagePaths(String uid) {
+    return _storageDataSource.getUserImagePaths(uid);
+  }
+
+  @override
   Future<String> uploadFile(String storagePath, File file) {
     return _storageDataSource.uploadFile(storagePath, file);
   }

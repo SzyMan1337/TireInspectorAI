@@ -41,6 +41,11 @@ class _UserRepository implements UserRepository {
   Future<bool> userExists(String uid) {
     return databaseDataSource.userExists(uid);
   }
+
+  @override
+  Future<void> deleteUserData(String uid) {
+    return databaseDataSource.deleteUserData(uid);
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>(

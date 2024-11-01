@@ -71,3 +71,8 @@ final deleteImageStateProvider =
         );
   },
 );
+
+final deleteAccountUseCaseProvider =
+    FutureProvider.autoDispose.family<void, String>((ref, uid) {
+  return ref.watch(userUseCaseProvider).deleteAccount(uid);
+});
