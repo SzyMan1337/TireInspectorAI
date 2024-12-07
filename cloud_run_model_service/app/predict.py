@@ -1,13 +1,17 @@
-from google.cloud import storage
 from flask import Blueprint, request, jsonify
-from tensorflow import keras
+import torch
 import numpy as np
+from PIL import Image
+from timm.data import resolve_data_config
+from timm.data.transforms_factory import create_transform
+from google.cloud import storage
 import os
 
 model_bp = Blueprint("model_bp", __name__)
 
-# Global variable to hold the loaded model
+# Global variables
 model = None
+transform = None
 
 
 # Function to download the model from Firebase Storage (GCS)
@@ -32,14 +36,14 @@ def download_model_from_firebase(bucket_name, source_blob_name, destination_file
         raise
 
 
-# Function to load the model if it's not already loaded
+# Function to load the PyTorch model and prepare the transform
 def load_model():
-    global model
+    global model, transform
     if model is None:
         # Define the Firebase Storage bucket and model path
         bucket_name = "tireinspectorai.appspot.com"
-        source_blob_name = "models/cloud_model/model.keras"
-        destination_file_name = "model.keras"
+        source_blob_name = "models/cloud_model/vit_model.pth"
+        destination_file_name = "vit_model.pth"
 
         # Download the model if it doesn't exist locally
         if not os.path.exists(destination_file_name):
@@ -47,32 +51,62 @@ def load_model():
                 bucket_name, source_blob_name, destination_file_name
             )
 
-        # Load the model from the downloaded file
-        print(f"Loading Keras model from {destination_file_name}")
-        model = keras.models.load_model(destination_file_name)
-        print("Model loaded successfully.")
+        # Load the PyTorch model
+        print(f"Loading PyTorch model from {destination_file_name}")
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        model = torch.load(destination_file_name, map_location=device)
+        model.eval()
+
+        # Resolve the data configuration and create the transform
+        print("Resolving data configuration for the model.")
+        config = resolve_data_config({}, model=model)
+        transform = create_transform(**config)
+
+        print("Model and transform loaded successfully.")
 
 
-# Prediction route
 @model_bp.route("/predict", methods=["POST"])
 def predict():
     try:
         # Load the model if it's not already loaded
         load_model()
 
-        # Get the input data from the request (expects a JSON object with 'inputData')
-        input_data = request.json.get("inputData")
-        if not input_data:
+        # Get the input data from the request (expects a JSON object with 'inputData' as a list)
+        image_data = request.json.get("inputData")
+        if not image_data:
             return jsonify({"error": "No input data provided"}), 400
 
-        # Convert the input data to a numpy array and reshape it to (1, 224, 224, 3)
-        input_tensor = np.array(input_data).reshape(1, 224, 224, 3)
+        try:
+            # Convert input data to a NumPy array
+            input_array = np.array(image_data, dtype=np.float32)
+
+            # Reshape if necessary (e.g., if data is flattened)
+            if input_array.ndim == 1:
+                # Assuming the image is flattened, reshape to (H, W, C)
+                input_array = input_array.reshape((224, 224, 3))
+
+            # Convert NumPy array to a PIL Image
+            image = Image.fromarray(input_array.astype('uint8'), 'RGB')
+
+            # Apply the transform to prepare the input for the model
+            input_tensor = transform(image).unsqueeze(0)  # Add batch dimension
+
+        except Exception as error:
+            return jsonify({"error": "Invalid input data format", "message": str(error)}), 400
+
+        # Move the tensor to the same device as the model
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        input_tensor = input_tensor.to(device)
 
         # Run the model prediction
-        output = model.predict(input_tensor)
+        with torch.no_grad():
+            raw_output = model(input_tensor)
+
+            # Apply Sigmoid to the raw output
+            output = torch.sigmoid(raw_output)
 
         # Return the prediction result as JSON
-        return jsonify({"result": output.tolist()})
+        return jsonify({"result": output.cpu().numpy().tolist()})
 
     except Exception as e:
         print(f"Error during prediction: {e}")

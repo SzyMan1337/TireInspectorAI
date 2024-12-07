@@ -1,5 +1,8 @@
 Flask
 gunicorn
-tensorflow
+torch
+torchvision
 numpy
 google-cloud-storage
+Pillow
+timm
