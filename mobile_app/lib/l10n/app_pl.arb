@@ -92,7 +92,7 @@
   "statusLabel": "Stan",
   "modelUsedLabel": "Użyty Model",
   "probabilityScoreDescription": "Prawdopodobieństwo Wady",
-  "statusExplanationTitle": "Stanu opony",
+  "statusExplanationTitle": "Stan opony",
   "defectiveStatusExplanation": "Wadliwe opony stanowią ryzyko dla bezpieczeństwa ze względu na zmniejszoną przyczepność, możliwość wybuchu lub wydłużoną drogę hamowania. Wymień lub skontroluj oponę jak najszybciej.",
   "goodStatusExplanation": "Opona jest w dobrym stanie, ale okresowe kontrole są konieczne, aby utrzymać bezpieczeństwo i wydajność.",
   "probabilityScoreDescriptionLow": "Prawdopodobieństwo uszkodzeń jest bardzo niskie, co sugeruje, że Twoja opona jest w doskonałym stanie. Regularne kontrole są jednak zalecane, aby zapewnić optymalną wydajność i bezpieczeństwo w dłuższej perspektywie.",
